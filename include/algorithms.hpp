@@ -8,7 +8,7 @@
  * Samples a possible world from the input uncertain graph.
  *
  * @param uncertain_graph input uncertain graph.
- * @param rng random number generator.
+ * @param rng random number generator for reproducibility.
  *
  * @return possible world sampled from the input uncertain graph.
 */

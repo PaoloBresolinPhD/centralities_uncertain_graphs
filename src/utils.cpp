@@ -153,6 +153,18 @@ void assign_node_ids(const std::string &input_dataset_path, const std::string &o
 
 }
 
-void assign_uniform_edge_probs(UncertainGraph &uncertain_graph) {
+void assign_uniform_edge_probs(UncertainGraph &uncertain_graph, std::mt19937 &rng) {
+     
+    // define a uniform distribution
+    std::uniform_real_distribution<double> distr(0.0, 1.0);
+
+    // sample a probability for each edge
+    std::vector<double> probs(uncertain_graph.m);
+    for (int i = 0; i < uncertain_graph.m; ++i)
+        probs[i] = distr(rng);
     
+    // assign probabilities to the edges of the uncertain graph based on their id (the edges (u, v) and (v, u) have the same id and so are assigned the same probability)
+    for (int u = 0; u < uncertain_graph.n; ++u)
+        for (auto &edge : uncertain_graph.adj[u])
+            edge.prob = probs[edge.id];
 }

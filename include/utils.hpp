@@ -2,6 +2,7 @@
 
 #include "uncertain_graph.hpp"
 #include <string>
+#include <random>
 
 /**
  * Loads a deterministic graph from file into an UncertainGraph with default edge probabilities p.
@@ -31,5 +32,6 @@ void assign_node_ids(const std::string &input_dataset_path, const std::string &o
  * Assigns a probabilibity to each edge, according to a uniform distribution.
  * 
  * @param uncertain_graph UncertainGraphs to be modified.
+ * @param rng random number generator for reproducibility.
  */
-void assign_uniform_edge_probs(UncertainGraph &uncertain_graph);
+void assign_uniform_edge_probs(UncertainGraph &uncertain_graph, std::mt19937 &rng);
