@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(main
     src/main.cpp
-    src/uncertain_graph.cpp
+    src/algorithms.cpp
+    src/utils.cpp
 )
 
 # compile options: optimized with -03 or for debugging with -fsanitize
