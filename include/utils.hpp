@@ -15,4 +15,21 @@
  * 
  * @return UncertainGraph with the loaded edges.
  */
-UncertainGraph load_uncertain_graph_no_probs(std::string file_path, double p);
+UncertainGraph load_uncertain_graph_no_probs(const std::string &file_path, double p);
+
+/**
+ * Maps each string identifying a node to a consecutive integer id.
+ * Both the converted dataset and the mapping that associates each integer id to the corresponding string id are saved.
+ * 
+ * @param input_dataset_path path to the file with the input dataset, where each node is encoded as a string.
+ * @param output_dataset_path path to the file where to store the dataset with the nodes converted into integer ids.
+ * @param output_map_path path to the file where to store the mapping that associates each integer id back to the corresponding string.
+ */
+void assign_node_ids(const std::string &input_dataset_path, const std::string &output_dataset_path, const std::string &output_map_path);
+
+/**
+ * Assigns a probabilibity to each edge, according to a uniform distribution.
+ * 
+ * @param uncertain_graph UncertainGraphs to be modified.
+ */
+void assign_uniform_edge_probs(UncertainGraph &uncertain_graph);

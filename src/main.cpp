@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     std::string input_file_path = argv[1];
 
     // load the graph
-    std::cout << "Loading the graph from the file " << input_file_path << "\n";
+    std::cout << "Loading the graph from the file " << input_file_path << "...\n";
     UncertainGraph uncertain_graph = load_uncertain_graph_no_probs(input_file_path, p);
 
     // print some information about the loaded graph
