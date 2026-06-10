@@ -43,10 +43,41 @@ int main(int argc, char* argv[]) {
     // assign random probabilities to the edges in the graph
     assign_uniform_edge_probs(uncertain_graph, rng);
 
-    // CHECK THAT IT WORKED BY PRINTING THINGS
-    // BUILD AND RUN
+    // // print some information about the probabilities
+    // std::cout << "\n\nProbabilities assigned to some edges:\n\n";
+    // for (int i = 0; i < 10; ++i)
+    //     for (const auto &e : uncertain_graph.adj[i])
+    //         std::cout << "Edge: " << e.id << " | p: " << e.prob << "\n";
+    // double avg_prob = 0;
+    // for (int i = 0; i < uncertain_graph.n; ++i)
+    //     for (const auto &e : uncertain_graph.adj[i])
+    //         avg_prob += e.prob;
+    // std::cout << "\n\nAverage assigned edge probability: " << avg_prob / (2 * uncertain_graph.m) << "\n";
     
-    // SAMPLE POSSIBLE WORLD
+    // // sample a couple of possible worlds
+    // PossibleWorld w_1 = sample_world(uncertain_graph, rng);
+    // PossibleWorld w_2 = sample_world(uncertain_graph, rng);
+
+    // // print some information about the sampled possible worlds
+    // std::cout << "Uncertain graph n: " << uncertain_graph.n << "\n";
+    // std::cout << "Uncertain graph m: " << uncertain_graph.m << "\n";
+    // std::cout << "\nPossible world 1 n: " << w_1.n << "\n";
+    // std::cout << "Possible world 1 m: " << w_1.m << "\n";
+    // std::cout << "\nPossible world 2 n: " << w_2.n << "\n";
+    // std::cout << "Possible world 2 m: " << w_2.m << "\n";
+    // std::vector<int> a = {0, 1, 27, 814};
+    // for (const int u : a) {
+    //     std::cout << "\n\nNodes reached by " << u << " in the uncertain graph:\n";
+    //     for (const auto &v : uncertain_graph.adj[u])
+    //         std::cout << v.dst << "\n";
+    //     std::cout << "\n\nNodes reached by " << u << " in the possible world 1:\n";
+    //     for (const int v : w_1.adj[u])
+    //         std::cout << v << "\n";
+    //     std::cout << "\n\nNodes reached by " << u << " in the possible world 2:\n";
+    //     for (const int v : w_2.adj[u])
+    //         std::cout << v << "\n";
+    // }
+
 
     return 0;
 }
