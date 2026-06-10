@@ -19,7 +19,6 @@
 
 # executables
 *.exe
-*.out
 *.app
 
 # build directories
