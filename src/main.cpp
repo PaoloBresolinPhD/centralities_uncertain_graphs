@@ -1,4 +1,5 @@
-#include "algorithms.hpp"
+#include "uncertain_graph.hpp"
+#include "lin_algorithms.hpp"
 #include "utils.hpp"
 #include <iostream>
 
@@ -40,8 +41,8 @@ int main(int argc, char* argv[]) {
     //     }
     // }
 
-    // assign random probabilities to the edges in the graph
-    assign_uniform_edge_probs(uncertain_graph, rng);
+    // // assign random probabilities to the edges in the graph
+    // assign_uniform_edge_probs(uncertain_graph, rng);
 
     // // print some information about the probabilities
     // std::cout << "\n\nProbabilities assigned to some edges:\n\n";

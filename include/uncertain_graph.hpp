@@ -1,6 +1,8 @@
 #pragma once
 
+#include "possible_world.hpp"
 #include <vector>
+#include <random>
 
 /**
  * Edge of an uncertain graph.
@@ -31,16 +33,23 @@ struct UncertainGraph {
 };
 
 /**
- * Represents a possible world of an uncertain graph.
- * 
- * Since the graph might be unconnected, some nodes can have an empty vector of edges.
+ * Samples a possible world from the input uncertain graph.
  *
- * @param n number of nodes in the possible world.
- * @param m number of undirected edges in the possible world.
- * @param adj adjacency list of the possible world. adj[u] has all nodes reached by edges with u as source node.
+ * @param uncertain_graph uncertain graph.
+ * @param rng random number generator for reproducibility.
+ *
+ * @return possible world sampled from the input uncertain graph.
 */
-struct PossibleWorld {
-    int n;
-    int m;
-    std::vector<std::vector<int>> adj;
-};
+PossibleWorld sample_world(const UncertainGraph &uncertain_graph, std::mt19937 &rng);
+
+/**
+ * Approximates the centrality of all the nodes in the input uncertain graph by running the input centrality function on an input number of Monte carlo samples.
+ * 
+ * @param uncertain_graph uncertain graph.
+ * @param k number of possible worlds to sample.
+ * @param in_world_centrality_fn address of the centrality function to apply in each possible world of the input uncertain graph.
+ * @param rng random number generator for reproducibility.
+ * 
+ * @return vector of double where each component with index v stores the centrality of v in the input uncertain graph.
+ */
+std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int k, std::vector<double> (*in_world_centrality_fn) (const PossibleWorld &world), std::mt19937 &rng);

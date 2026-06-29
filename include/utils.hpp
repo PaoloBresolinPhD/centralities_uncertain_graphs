@@ -35,3 +35,13 @@ void assign_node_ids(const std::string &input_dataset_path, const std::string &o
  * @param rng random number generator for reproducibility.
  */
 void assign_uniform_edge_probs(UncertainGraph &uncertain_graph, std::mt19937 &rng);
+
+/**
+ * Saves a table of centralities in the input file into tsv format.
+ * The produced file will have a column for each vector of centralities and a row for each node.
+ * 
+ * @param output_path path to the file where to save the centralities.
+ * @param centralitites vector of vectors of double. centralities[i] stores the vector of centralities with index i. centralities[i][j] stores the centrality computed by method i for node j.
+ * @param column_names vector of strings used to create the header of the tsv file. column_names[i] is the name associated with the vector of centralities centralities[i].
+ */
+void save_centralities_tsv(const std::string &output_path, const std::vector<std::vector<double>> &centralities, const std::vector<std::string> &column_names);

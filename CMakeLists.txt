@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.28.3)
 project(CentralitiesUncertainGraphs)
 set(CMAKE_CXX_STANDARD 20)
 
+# find OpenMP
+find_package(OpenMP REQUIRED)
+
 # create a library with the code shared among all executables
 add_library(centralities_lib STATIC
     src/utils.cpp
@@ -12,18 +15,20 @@ add_executable(preprocess_data
     src/preprocess_data.cpp
 )
 
-# main executable that loads an uncertain graph and runs experiments on it
-add_executable(main
-    src/main.cpp
-    src/algorithms.cpp
+# executable that runs the mc + exact algorithm on an input dataset
+add_executable(run_mc_exact
+    src/run_mc_exact.cpp
+    src/lin_algorithms.cpp
+    src/uncertain_graph.cpp
+    src/possible_world.cpp
 )
 
 # link the library to the executables
 target_link_libraries(preprocess_data PRIVATE centralities_lib)
-target_link_libraries(main PRIVATE centralities_lib)
+target_link_libraries(run_mc_exact PRIVATE centralities_lib)
 
 # iterate over all executables
-foreach(target centralities_lib preprocess_data main)
+foreach(target centralities_lib preprocess_data run_mc_exact)
 
     # compile options: optimized with -03 or for debugging with -fsanitize
     target_compile_options(${target} PRIVATE
@@ -38,5 +43,8 @@ foreach(target centralities_lib preprocess_data main)
 
     # include the include directory with header files
     target_include_directories(${target} PUBLIC include)
+
+    # link OpenMP
+    target_link_libraries(${target} PRIVATE OpenMP::OpenMP_CXX)
 
 endforeach()
