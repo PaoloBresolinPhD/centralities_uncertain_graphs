@@ -1,10 +1,8 @@
 #include "utils.hpp"
-#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <unordered_map>
 #include <iomanip>
-#include <filesystem>
 
 UncertainGraph load_uncertain_graph_no_probs(const std::string &file_path, double p) {
     
@@ -171,12 +169,11 @@ void assign_uniform_edge_probs(UncertainGraph &uncertain_graph, std::mt19937 &rn
             edge.prob = probs[edge.id];
 }
 
-void save_centralities_tsv(const std::string &output_path, const std::vector<std::vector<double>> &centralities, const std::vector<std::string> &column_names) {
+void save_centralities_tsv(const std::filesystem::path &output_path, const std::vector<std::vector<double>> &centralities, const std::vector<std::string> &column_names) {
 
     // create the output directory if it does not exist
-    std::filesystem::path path(output_path);
-    if (path.has_parent_path())
-        std::filesystem::create_directories(path.parent_path());
+    if (output_path.has_parent_path())
+        std::filesystem::create_directories(output_path.parent_path());
 
     // open the output file
     std::ofstream file(output_path);

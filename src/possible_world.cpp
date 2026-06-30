@@ -2,10 +2,10 @@
 #include <queue>
 #include <cmath>
 
-std::vector<int> bfs_distances(const PossibleWorld &world, int u) {
+std::map<int, int> bfs_distances(const PossibleWorld &world, int u) {
     
-    // initialize the vector that will contain all distances with the sentinel value -1
-    std::vector<int> distances(world.n, -1);
+    // initialize the map that will contain (node, distance) pairs
+    std::map<int, int> distances;
 
     // initialize the queue of the bfs with the source node u
     std::queue<int> queue;
@@ -25,7 +25,7 @@ std::vector<int> bfs_distances(const PossibleWorld &world, int u) {
         for (int w : world.adj[v]) {
 
             // visit the node only if not visited yet
-            if (distances[w] == -1) {
+            if (distances.find(w) == distances.end()) {
                 
                 // store the distance from u to w and enqueue w
                 distances[w] = distances[v] + 1;

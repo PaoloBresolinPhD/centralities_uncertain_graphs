@@ -16,8 +16,8 @@ add_executable(preprocess_data
 )
 
 # executable that runs the mc + exact algorithm on an input dataset
-add_executable(run_mc_exact
-    src/run_mc_exact.cpp
+add_executable(run_lin_experiments
+    src/run_lin_experiments.cpp
     src/lin_algorithms.cpp
     src/uncertain_graph.cpp
     src/possible_world.cpp
@@ -25,10 +25,10 @@ add_executable(run_mc_exact
 
 # link the library to the executables
 target_link_libraries(preprocess_data PRIVATE centralities_lib)
-target_link_libraries(run_mc_exact PRIVATE centralities_lib)
+target_link_libraries(run_lin_experiments PRIVATE centralities_lib)
 
 # iterate over all executables
-foreach(target centralities_lib preprocess_data run_mc_exact)
+foreach(target centralities_lib preprocess_data run_lin_experiments)
 
     # compile options: optimized with -03 or for debugging with -fsanitize
     target_compile_options(${target} PRIVATE

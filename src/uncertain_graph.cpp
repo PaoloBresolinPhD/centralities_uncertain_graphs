@@ -35,7 +35,7 @@ PossibleWorld sample_world(const UncertainGraph &uncertain_graph, std::mt19937 &
     return world;
 }
 
-std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int k, std::vector<double> (*in_world_centrality_fn) (const PossibleWorld &world), std::mt19937 &rng) {
+std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int k, const std::function<std::vector<double>(const PossibleWorld&)> &in_world_centrality_fn, std::mt19937 &rng) {
 
     // initialize the centralities computed in the possible worlds
     std::vector<double> centralities_uncertain(uncertain_graph.n, 0.0);

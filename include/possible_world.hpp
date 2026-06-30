@@ -19,15 +19,14 @@ struct PossibleWorld {
 };
 
 /**
- * Performs a bfs to compute the distance from u to all the other nodes in the input possible world.
- * Since a possible world might be disconnected, then the distance between u and a node not reachable from u in the input possible world are set to the sentinel value -1.
+ * Performs a bfs to compute the distance from u to all the other nodes in the same connected component of u in the input possible world.
  * 
  * @param world possible world.
  * @param u source node.
  * 
- * @return vector of int where the component with index v stores the distance between u and v in the input possible world.
+ * @return map where the first element of each entry is the id of a node reached by the BFS from u and the second element is the distance from u to the node.
  */
-std::vector<int> bfs_distances(const PossibleWorld &world, int u);
+std::map<int, int> bfs_distances(const PossibleWorld &world, int u);
 
 /**
  * Finds all nodes reachable from u in the input possible world.

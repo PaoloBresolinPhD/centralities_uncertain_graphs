@@ -3,6 +3,8 @@
 #include "uncertain_graph.hpp"
 #include <string>
 #include <random>
+#include <filesystem>
+#include <fstream>
 
 /**
  * Loads a deterministic graph from file into an UncertainGraph with default edge probabilities p.
@@ -44,4 +46,35 @@ void assign_uniform_edge_probs(UncertainGraph &uncertain_graph, std::mt19937 &rn
  * @param centralitites vector of vectors of double. centralities[i] stores the vector of centralities with index i. centralities[i][j] stores the centrality computed by method i for node j.
  * @param column_names vector of strings used to create the header of the tsv file. column_names[i] is the name associated with the vector of centralities centralities[i].
  */
-void save_centralities_tsv(const std::string &output_path, const std::vector<std::vector<double>> &centralities, const std::vector<std::string> &column_names);
+void save_centralities_tsv(const std::filesystem::path &output_path, const std::vector<std::vector<double>> &centralities, const std::vector<std::string> &column_names);
+
+/**
+ * Saves a vector in a file in tsv format.
+ * 
+ * @param output_path path to the output file where to save the vector.
+ * @param vec vector to save.
+ * @param column_names vector of strings with a name associated with each entry in the vector.
+ */
+template <typename T>
+void save_vector_tsv(const std::filesystem::path &output_path, const std::vector<T> &vec, const std::vector<std::string> &column_names) {
+
+    // create the output directory if it does not exist
+    if (output_path.has_parent_path())
+        std::filesystem::create_directories(output_path.parent_path());
+
+    // open the output file
+    std::ofstream file(output_path);
+
+    // set the number of digits to save per entry
+    file << std::setprecision(10);
+
+    // print the header
+    for (int i = 0; i < (int) column_names.size() - 1; ++i)
+        file << column_names[i] << "\t";
+    file << column_names[column_names.size() - 1] << "\n";
+
+    // print the values in the vector
+    for (int i = 0; i < (int) vec.size() - 1; ++i)
+        file << vec[i] << "\t";
+    file << vec[vec.size() - 1] << "\n";
+}
