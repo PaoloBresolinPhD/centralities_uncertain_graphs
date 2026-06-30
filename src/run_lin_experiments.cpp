@@ -167,9 +167,19 @@ int main(int argc, char* argv[]) {
     // assign uniform probabilities to the edges in the graph
     assign_uniform_edge_probs(uncertain_graph, rng);
 
-
     // run the experiments
     run_single_experiment(uncertain_graph, output_path, k_baseline, c_ew, k, l, rng);
+
+
+    // TODO:
+    //     - implement the pps algorithm for the lin's index;
+    //     - add the implemented algorithm to this file and test it to see whether the output centralities make sense;
+    //     - change this code to to save the vectors of errors with respect to the exact baseline rather than the centralities and run to see whether the saved errors make sense;
+    //     - change this code to envelop the single experiment into a for that repeats the experiment n times.
+    //       Each of the n single experiments returns the table with the errors and the vector with the running times.
+    //       Once a single experiment is executed the errors and times are summed up across experiment repetitions.
+    //       After that all single experiments have finished, the errors and times are averaged and saved to file;
+    //     - implement everything for the harmonic centrality.
 
     return 0;
 }
