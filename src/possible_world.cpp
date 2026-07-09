@@ -32,7 +32,6 @@ std::map<int, int> bfs_distances(const PossibleWorld &world, int u) {
                 queue.push(w);
             }
         }
-
     }
 
     return distances;

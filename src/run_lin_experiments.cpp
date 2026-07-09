@@ -26,12 +26,12 @@ std::pair<std::vector<double>, double> run_method(UncertainGraph &uncertain_grap
     return std::pair<std::vector<double>, double>(centralities_errors, elapsed_time.count());
 }
 
-void run_single_experiment(UncertainGraph &uncertain_graph, std::string &output_dir_path, int k_baseline, double c_ew, int k, int l, std::mt19937 &rng) {
+void run_single_experiment(UncertainGraph &uncertain_graph, std::string &output_dir_path, double epsilon, double delta, int k_baseline, double c_ew, int k, int l, std::mt19937 &rng) {
 
     // ---------- INITIALIZATION ----------
 
     // number of methods to compare
-    int n_methods = 3;
+    int n_methods = 4;
 
     // vector that will contain the name of each method
     std::vector<std::string> method_names;
@@ -94,6 +94,24 @@ void run_single_experiment(UncertainGraph &uncertain_graph, std::string &output_
     table.push_back(ew_errors);
     exec_times.push_back(ew_elapsed_time);
 
+    // ---------- PPS ----------
+
+    // append the name of the method
+    method_names.push_back("pps");
+
+    // create the lambda adapter for the pps_lin_world function, since it requires additional input arguments
+    auto pps_lin_world_adapter = [&](const PossibleWorld &world) {
+        return pps_lin_world(world, k, l, delta, rng);
+    };
+
+    // run the pps algorithm on the input uncertain graph with k
+    std::cout << "Running pps with k = " << k << " and l = " << l << std::endl;
+    auto [pps_errors, pps_elapsed_time] = run_method(uncertain_graph, pps_lin_world_adapter, k, exact_centralities_baseline, rng);
+
+    // append the computed errors and the execution time of the current method
+    table.push_back(pps_errors);
+    exec_times.push_back(pps_elapsed_time);
+
     // ---------- SAVE THE RESULTS ----------
 
     // path to the folder where to save the results
@@ -116,6 +134,8 @@ int main(int argc, char* argv[]) {
     // default command line parameters
     std::string input_path = "";
     std::string output_path = "";
+    double epsilon = 0.1;
+    double delta = 0.1;
     double c_ew = 1;
     int k_baseline = 10000;
     int k = 1000;
@@ -133,6 +153,8 @@ int main(int argc, char* argv[]) {
             output_path = value;
         else if (flag == "--c_ew")
             c_ew = std::stod(value);
+        else if (flag == "--delta")
+            delta = std::stod(value);
         else if (flag == "--k_baseline")
             k_baseline = std::stoi(value);
         else if (flag == "--k")
@@ -178,17 +200,16 @@ int main(int argc, char* argv[]) {
     assign_uniform_edge_probs(uncertain_graph, rng);
 
     // run the experiments
-    run_single_experiment(uncertain_graph, output_path, k_baseline, c_ew, k, l, rng);
+    run_single_experiment(uncertain_graph, output_path, epsilon, delta, k_baseline, c_ew, k, l, rng);
 
 
     // TODO:
-    //     - implement the pps algorithm for the lin's index;
     //     - add the implemented algorithm to this file and test it to see whether the output errors make sense;
+    //     - redesign the single experiment by adding epsilon and delta as input command line arguments and computing k, l, c, p_s based on them;
     //     - change this code to envelop the single experiment into a for that repeats the experiment n times.
-    //       Each of the n single experiments returns the table with the errors and the vector with the running times.
+    //       Each of the n single experiments returns the table with the errors and a table with: running times, k, l, c, p_s.
     //       Once a single experiment is executed the errors and times are summed up across experiment repetitions.
     //       After that all single experiments have finished, the errors and times are averaged and saved to file;
-    //     - compute the expected error epsilon, once set c, l, k, delta from the theory and compare it with the experimental results;
     //     - implement everything for the harmonic centrality.
 
     return 0;
