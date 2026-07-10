@@ -1,4 +1,5 @@
 #include "uncertain_graph.hpp"
+#include "possible_world.hpp"
 #include <queue>
 #include <cmath>
 #include <omp.h>
@@ -83,4 +84,20 @@ std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncert
         centralities_uncertain[u] /= k;
 
     return centralities_uncertain;
+}
+
+PossibleWorld extract_backbone(const UncertainGraph &uncertain_graph) {
+
+    // initialize the possible world that will contain all the edges in the uncertain graph
+    PossibleWorld backbone;
+    backbone.n = uncertain_graph.n;
+    backbone.adj = std::vector<std::vector<int>>(backbone.n);
+    backbone.m = uncertain_graph.m;
+
+    // iterate through all the edges and add them to the possible world
+    for (int i = 0; i < uncertain_graph.n; ++i)
+        for (const UncertainEdge &e : uncertain_graph.adj[i])
+            backbone.adj[i].push_back(e.dst);
+
+    return backbone;
 }

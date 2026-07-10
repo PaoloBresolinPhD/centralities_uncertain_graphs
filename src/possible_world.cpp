@@ -1,6 +1,7 @@
 #include "possible_world.hpp"
 #include <queue>
 #include <cmath>
+#include <climits>
 
 std::map<int, int> bfs_distances(const PossibleWorld &world, int u) {
     
@@ -119,4 +120,55 @@ std::map<int, int> components_sizes(const std::vector<int> &components) {
     }
 
     return sizes;
+}
+
+int upper_bound_max_diameter(const PossibleWorld &world, int h, std::mt19937 &rng) {
+
+    // compute the connected components
+    std::vector<int> comps = connected_components(world);
+
+    // create a map with the ids of the connected components as keys and vectors with the corresponding nodes as values
+    std::map<int, std::vector<int>> comps_map;
+    for (int u = 0; u < (int) comps.size(); ++u)
+        comps_map[comps[u]].push_back(u);
+
+    // initialize the variable that will contain the maximum across all connected components of the minimum of the maximum distances from the sampled nodes
+    int diameter_ub = 0;
+
+    // iterate through the connected components
+    for (auto &curr_comp : comps_map) {
+
+        // define a uniform distrubution of integers, used to sample nodes from the current connected component
+        std::uniform_int_distribution<int> distr(0, curr_comp.second.size() - 1);
+
+        // initialize the variable that will contain the minimum of the maximum distances from the sampled nodes
+        int min_ub_comp = INT_MAX;
+
+        // iterate h times
+        for (int i = 0; i < h; ++i) {
+
+            // compute the distances from a node sampled uniformly at random and all the other nodes in the connected component
+            std::map<int, int> curr_distances = bfs_distances(world, curr_comp.second[distr(rng)]);
+
+            // find the maximum distance
+            int curr_max_dist = 0;
+            for (auto &reached : curr_distances) {
+                if (reached.second > curr_max_dist)
+                    curr_max_dist = reached.second;
+                if (reached.second > min_ub_comp)
+                    break;
+            }
+
+            // update the minimum across all sampled nodes
+            if (curr_max_dist < min_ub_comp)
+                min_ub_comp = curr_max_dist;   
+        }
+
+        // if the minimum found upper bound is larger than the the upper bound found in the connected components found so far, then update it
+        if (min_ub_comp > diameter_ub)
+            diameter_ub = min_ub_comp;
+    }
+
+    // return the upper bound, which is twice the maximum distance found by sampling
+    return 2 * diameter_ub;
 }

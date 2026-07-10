@@ -1,5 +1,6 @@
 #pragma once
 
+#include <random>
 #include <vector>
 #include <map>
 
@@ -55,3 +56,19 @@ std::vector<int> connected_components(const PossibleWorld &world);
  * @return map with the size of each connected component. The entry with key i stores the number of nodes in the connected component with index i.
  */
 std::map<int, int> components_sizes(const std::vector<int> &components);
+
+/**
+ * Computes an upper bound to the maximum diameter in the input possible world.
+ * The maximum diameter corresponds to the maximum possible distance between two nodes in any connected component of the input possible world.
+ * In each connected component, a node u is sampled uniformly at random and its distance d(u, v) from the farthest node v is computed.
+ * Since the diameter of the connected component is <= 2 * d(u, v), then 2 * d(u, v) is an upper bound to the diameter for the considered connected component.
+ * h nodes are sampled and the minimum value 2 * d(u, v) is considered for the considered connected component.
+ * The maximum upper bound among all connected components is finally returned as upper bound for the maximum diameter across the connected components of the input graph.
+ * 
+ * @param possible_world possible world.
+ * @param h number of nodes to sample from each connected component.
+ * @param rng random number generator for reproducibility.
+ * 
+ * @return integer representing the maximum diameter in the input possible world.
+ */
+int upper_bound_max_diameter(const PossibleWorld &world, int h, std::mt19937 &rng);

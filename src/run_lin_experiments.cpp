@@ -26,7 +26,7 @@ std::pair<std::vector<double>, double> run_method(UncertainGraph &uncertain_grap
     return std::pair<std::vector<double>, double>(centralities_errors, elapsed_time.count());
 }
 
-void run_single_experiment(UncertainGraph &uncertain_graph, std::string &output_dir_path, double epsilon, double delta, int k_baseline, double c_ew, int k, int l, std::mt19937 &rng) {
+void run_single_experiment(UncertainGraph &uncertain_graph, std::string &output_dir_path, double epsilon, double delta, int k_baseline, int diameter_ub, std::mt19937 &rng) {
 
     // ---------- INITIALIZATION ----------
 
@@ -65,9 +65,12 @@ void run_single_experiment(UncertainGraph &uncertain_graph, std::string &output_
     // append the name of the method
     method_names.push_back("exact");
 
+    // compute k based on the input epsilon and delta
+    int k_exact = std::ceil( 1.0 / ( 2 * std::pow(epsilon, 2) ) * std::log(2 * uncertain_graph.n / delta) );
+
     // run the exact algorithm on the input uncertain graph with k
-    std::cout << "Running exact with k = " << k << std::endl;
-    auto [exact_errors, exact_elapsed_time] = run_method(uncertain_graph, exact_lin_world, k, exact_centralities_baseline, rng);
+    std::cout << "Running exact with k = " << k_exact << std::endl;
+    auto [exact_errors, exact_elapsed_time] = run_method(uncertain_graph, exact_lin_world, k_exact, exact_centralities_baseline, rng);
 
     // append the computed errors and the execution time of the current method
     table.push_back(exact_errors);
@@ -78,17 +81,23 @@ void run_single_experiment(UncertainGraph &uncertain_graph, std::string &output_
     // append the name of the method
     method_names.push_back("ew");
 
-    // set c to be at least 2
-    c_ew = std::max<double> (c_ew, 2);
+    // compute k, l and c based on the theory
+    double c_ew = epsilon * (uncertain_graph.n - 1) / 2 + 1;
+    int k_ew = std::ceil( 2.0 / std::pow(epsilon, 2) * std::log(6 * uncertain_graph.n / delta) );
+    int l_ew = std::ceil(
+        2.0 * std::pow(diameter_ub, 2) * std::pow(2 + epsilon, 2) * std::pow(epsilon * (uncertain_graph.n - 1) + 2, 2) /
+        (std::pow(epsilon, 6) * std::pow(uncertain_graph.n - 1, 2)) *
+        std::log(6 * uncertain_graph.n * k_ew / delta)
+    );
 
     // create the lambda adapter for the ew_lin_world function, since it requires additional input arguments
     auto ew_lin_world_adapter = [&](const PossibleWorld &world) {
-        return ew_lin_world(world, l, c_ew, rng);
+        return ew_lin_world(world, l_ew, c_ew, rng);
     };
 
     // run the ew algorithm on the input uncertain graph with k
-    std::cout << "Running ew with k = " << k << ", l = " << l << " and c = " << c_ew << std::endl;
-    auto [ew_errors, ew_elapsed_time] = run_method(uncertain_graph, ew_lin_world_adapter, k, exact_centralities_baseline, rng);
+    std::cout << "Running ew with k = " << k_ew << ", l = " << l_ew << " and c = " << c_ew << std::endl;
+    auto [ew_errors, ew_elapsed_time] = run_method(uncertain_graph, ew_lin_world_adapter, k_ew, exact_centralities_baseline, rng);
 
     // append the computed errors and the execution time of the current method
     table.push_back(ew_errors);
@@ -99,14 +108,18 @@ void run_single_experiment(UncertainGraph &uncertain_graph, std::string &output_
     // append the name of the method
     method_names.push_back("pps");
 
+    // compute k, l and c based on the theory
+    int k_pps = std::ceil( 2.0 / std::pow(epsilon, 2) * std::log(8 * uncertain_graph.n / delta) );
+    int l_pps = std::ceil( 3.0 * 18 * std::pow(2 + epsilon, 2) / std::pow(epsilon, 2) * std::log(4 * uncertain_graph.n * k_pps / delta) );
+
     // create the lambda adapter for the pps_lin_world function, since it requires additional input arguments
     auto pps_lin_world_adapter = [&](const PossibleWorld &world) {
-        return pps_lin_world(world, k, l, delta, rng);
+        return pps_lin_world(world, k_pps, l_pps, delta, rng);
     };
 
     // run the pps algorithm on the input uncertain graph with k
-    std::cout << "Running pps with k = " << k << " and l = " << l << std::endl;
-    auto [pps_errors, pps_elapsed_time] = run_method(uncertain_graph, pps_lin_world_adapter, k, exact_centralities_baseline, rng);
+    std::cout << "Running pps with k = " << k_pps << " and l = " << l_pps << std::endl;
+    auto [pps_errors, pps_elapsed_time] = run_method(uncertain_graph, pps_lin_world_adapter, k_pps, exact_centralities_baseline, rng);
 
     // append the computed errors and the execution time of the current method
     table.push_back(pps_errors);
@@ -136,10 +149,8 @@ int main(int argc, char* argv[]) {
     std::string output_path = "";
     double epsilon = 0.1;
     double delta = 0.1;
-    double c_ew = 1;
     int k_baseline = 10000;
-    int k = 1000;
-    int l = 10;
+    int h = 10;
     int random_seed = 27;
     int n_threads = 8;
 
@@ -151,16 +162,14 @@ int main(int argc, char* argv[]) {
             input_path = value;
         else if (flag == "--output_path")
             output_path = value;
-        else if (flag == "--c_ew")
-            c_ew = std::stod(value);
+        else if (flag == "--epsilon")
+            epsilon = std::stod(value);
         else if (flag == "--delta")
             delta = std::stod(value);
         else if (flag == "--k_baseline")
             k_baseline = std::stoi(value);
-        else if (flag == "--k")
-            k = std::stoi(value);
-        else if (flag == "--l")
-            l = std::stoi(value);
+        else if (flag == "--h")
+            h = std::stoi(value);
         else if (flag == "--r")
             random_seed = std::stoi(value);
         else if (flag == "--n_threads")
@@ -199,12 +208,15 @@ int main(int argc, char* argv[]) {
     // assign uniform probabilities to the edges in the graph
     assign_uniform_edge_probs(uncertain_graph, rng);
 
+    // compute an upper bound to the maximum diameter in the uncertain graph
+    std::cout << "Computing the diameter of the input uncertain graph..." << std::endl;
+    int diameter_ub = upper_bound_max_diameter(extract_backbone(uncertain_graph), h, rng);
+
     // run the experiments
-    run_single_experiment(uncertain_graph, output_path, epsilon, delta, k_baseline, c_ew, k, l, rng);
+    run_single_experiment(uncertain_graph, output_path, epsilon, delta, k_baseline, diameter_ub, rng);
 
 
     // TODO:
-    //     - add the implemented algorithm to this file and test it to see whether the output errors make sense;
     //     - redesign the single experiment by adding epsilon and delta as input command line arguments and computing k, l, c, p_s based on them;
     //     - change this code to envelop the single experiment into a for that repeats the experiment n times.
     //       Each of the n single experiments returns the table with the errors and a table with: running times, k, l, c, p_s.

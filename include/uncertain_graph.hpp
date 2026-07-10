@@ -44,6 +44,16 @@ struct UncertainGraph {
 PossibleWorld sample_world(const UncertainGraph &uncertain_graph, std::mt19937 &rng);
 
 /**
+ * Returns the backbone of the input uncertain graph.
+ * The backbone of an uncertain graph is the possible world in which all edges exist.
+ * 
+ * @param uncertain_graph uncertain graph.
+ * 
+ * @return backbone graph of the input possible world.
+ */
+PossibleWorld extract_backbone(const UncertainGraph &uncertain_graph);
+
+/**
  * Approximates the centrality of all the nodes in the input uncertain graph by running the input centrality function on an input number of Monte carlo samples.
  * 
  * @param uncertain_graph uncertain graph.
