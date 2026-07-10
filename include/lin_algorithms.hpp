@@ -65,11 +65,10 @@ std::map<int, double> lin_pps_sample(const PossibleWorld &world, const std::vect
  * Approximates the Lin's index of all nodes in the input possible world using the PPS-based algorithm.
  * 
  * @param world possible world.
- * @param k integer representing the number of possible worlds sampled in the Monte Carlo method. It is required to compute p_s.
  * @param l int suggesting the number of nodes to sample in each connected component of the possible world. The number of sampled points will be O(l).
- * @param delta double representing the confidence for the final estimates. Required to compute p_s.
+ * @param p_s_factor integer representing the factor to multiply to the Poisson probability for the initial sample, initialized to (1 / connected component size).
  * @param rng random number generator for reproducibility.
  * 
  * @return vector of double where the component with index v stores the Lin's index of v in the input possible world.
  */
-std::vector<double> pps_lin_world(const PossibleWorld &world, int k, int l, double delta, std::mt19937 &rng);
+std::vector<double> pps_lin_world(const PossibleWorld &world, int l, int p_s_factor, std::mt19937 &rng);

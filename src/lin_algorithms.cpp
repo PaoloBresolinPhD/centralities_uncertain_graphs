@@ -167,7 +167,7 @@ std::map<int, double> lin_pps_sample(const PossibleWorld &world, const std::vect
     return sample;
 }
 
-std::vector<double> pps_lin_world(const PossibleWorld &world, int k, int l, double delta, std::mt19937 &rng)  {
+std::vector<double> pps_lin_world(const PossibleWorld &world, int l, int p_s_factor, std::mt19937 &rng) {
 
     // initialize the vector that will store the Lin's indices
     std::vector<double> centralities(world.n, 0);
@@ -188,12 +188,9 @@ std::vector<double> pps_lin_world(const PossibleWorld &world, int k, int l, doub
 
         // if the component is larger than l, then we sample O(l) nodes from the connected component using PPS sampling
         if (comp.second > l) {
-
-            // compute p_s according to the theory
-            double p_s = 2.0 / comp.second * std::log(4 * k * comp_sizes.size() / delta);
             
             // extract the PPS sample
-            std::map<int, double> map_sample = lin_pps_sample(world, comp_nodes, l, p_s, rng);
+            std::map<int, double> map_sample = lin_pps_sample(world, comp_nodes, l, p_s_factor * (1.0 / comp.second), rng);
         
             // update the centralities of all the nodes in the connected component by running a BFS from each sampled node
             for (auto &entry : map_sample) {

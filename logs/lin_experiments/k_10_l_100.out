@@ -1,0 +1,10 @@
+Loading the graph from the file "../data/preprocessed/ChG-Miner_miner-chem-gene.tsv"...
+Number of nodes: 7341
+Number of edges: 15138
+Computing the diameter of the input uncertain graph...
+Estimated upper bound for the diameter: 20
+Time required to estimate the upper bound: 4.12412s
+Running exact with k = 100
+Running mc with k = 10
+Running ew with k = 10, l = 100 and c = 5
+Running pps with k = 10, l = 100 and p_s factor = 10

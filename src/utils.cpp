@@ -168,30 +168,3 @@ void assign_uniform_edge_probs(UncertainGraph &uncertain_graph, std::mt19937 &rn
         for (auto &edge : uncertain_graph.adj[u])
             edge.prob = probs[edge.id];
 }
-
-void save_centralities_tsv(const std::filesystem::path &output_path, const std::vector<std::vector<double>> &centralities, const std::vector<std::string> &column_names) {
-
-    // create the output directory if it does not exist
-    if (output_path.has_parent_path())
-        std::filesystem::create_directories(output_path.parent_path());
-
-    // open the output file
-    std::ofstream file(output_path);
-
-    // set the number of digits to save per entry
-    file << std::setprecision(10);
-
-    // print the header
-    file << "Node\t";
-    for (int i = 0; i < (int) column_names.size() - 1; ++i)
-        file << column_names[i] << "\t";
-    file << column_names[column_names.size() - 1] << "\n";
-
-    // iterate through columns and rows to fill the file
-    for (int r = 0; r < (int) centralities[0].size(); ++r) {
-        file << r << "\t";
-        for (int c = 0; c < (int) centralities.size() - 1; ++c)
-            file << centralities[c][r] << "\t";
-        file << centralities[centralities.size() - 1][r] << "\n";
-    }
-}
