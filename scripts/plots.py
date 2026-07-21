@@ -145,37 +145,22 @@ if __name__ == "__main__":
     summaries_df = pd.concat([pd.read_csv(f, sep="\t") for f in input_path.rglob("summary.tsv")], ignore_index=True, join="outer")
     
     # plot how the running time changes as the number of threads changes, for fixed other values
-    k = 5
-    k_baseline = 20
-    l = 20
-    c = 2
+    k = 25
+    k_baseline = 500
+    l = 25
+    c = 5
     delta = 0.01
     plot_times_threads(summaries_df, k=k, k_baseline=k_baseline, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_threads__k_{k}_k_baseline_{k_baseline}_l_{l}_c_{c}_delta{delta}.pdf"))
 
     # plot how the running time changes as k changes, for fixed other values
-    n_threads = 8
-    l = 20
-    c = 2
-    delta = 0.01
+    n_threads = 16
     plot_times_k(summaries_df, n_threads=n_threads, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_k__threads_{n_threads}_l_{l}_c_{c}_delta{delta}.pdf"))
 
     # plot how the running time changes as l changes, for fixed other values
-    k = 5
-    n_threads = 8
-    c = 2
-    delta = 0.01
     plot_times_l(summaries_df, k=k, n_threads=n_threads, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_l__k_{k}_n_threads_{n_threads}_c_{c}_delta{delta}.pdf"))
 
     # plot how the error changes as k changes, for fixed other values
-    n_threads = 8
-    l = 20
-    c = 2
-    delta = 0.01
     plot_errors_k(summaries_df, n_threads=n_threads, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"errors_over_k__threads_{n_threads}_l_{l}_c_{c}_delta{delta}.pdf"))
 
     # plot how the error changes as l changes, for fixed other values
-    n_threads = 8
-    k = 7
-    c = 2
-    delta = 0.01
     plot_errors_l(summaries_df, n_threads=n_threads, k=k, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"errors_over_l__threads_{n_threads}_k_{k}_c_{c}_delta{delta}.pdf"))

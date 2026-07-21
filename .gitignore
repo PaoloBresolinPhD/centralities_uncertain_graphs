@@ -1,3 +1,9 @@
+# vs code files
+*.vscode
+
+# virtual environments
+*.venv
+
 # prerequisites
 *.d
 
