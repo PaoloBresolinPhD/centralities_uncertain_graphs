@@ -1,2 +1,0 @@
-c_ew	 ew_error_avg  	 ew_error_max 	 ew_error_min	 ew_time    	 exact_time	 exp_rep	 k_baseline	 k_ew	 k_mc	 k_pps	 l_ew	 l_pps	 mc_error_avg  	 mc_error_max 	 mc_error_min	 mc_time    	 p_s_factor	 pps_error_avg 	 pps_error_max	 pps_error_min	 pps_time
-   5	 0.005568086927	 0.05346489458	            0	 5.855171666	 679.836423	       0	        100	   10	   10	    10	  100	   100	 0.005674375953	 0.05221844665	            0	 99.44227592	         10	 0.005889568079	   0.056051068	             0	 7.162163173

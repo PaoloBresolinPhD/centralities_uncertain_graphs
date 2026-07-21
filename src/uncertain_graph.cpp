@@ -36,24 +36,19 @@ PossibleWorld sample_world(const UncertainGraph &uncertain_graph, std::mt19937 &
     return world;
 }
 
-std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int k, const std::function<std::vector<double>(const PossibleWorld&)> &in_world_centrality_fn, std::mt19937 &rng) {
+std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int k, const std::function<std::vector<double>(const PossibleWorld&, std::mt19937 &rng)> &in_world_centrality_fn, std::mt19937 &rng) {
 
     // initialize the centralities computed in the possible worlds
     std::vector<double> centralities_uncertain(uncertain_graph.n, 0.0);
 
-    // generate a different random seed for each thread
-    int n_threads = omp_get_max_threads();
-    std::vector<uint32_t> seeds(n_threads);
-    for (auto &s : seeds)
-        s = rng();
+    // generate a different random seed for each possible world to generate
+    std::vector<uint32_t> seeds(k);
+    for (int i = 0; i < k; ++i)
+        seeds[i] = rng();
 
     // parallel region
     #pragma omp parallel
     {
-
-        // initialize the random number generator for a single thread
-        std::mt19937 thread_rng(seeds[omp_get_thread_num()]);
-
         // vector that stores the centralieties computed by a signle thread
         std::vector<double> thread_centralities(uncertain_graph.n, 0.0);
         
@@ -61,11 +56,14 @@ std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncert
         #pragma omp for schedule(dynamic)
         for (int i = 0; i < k; ++i) {
 
+            // define the random number generator for the current iteration
+            std::mt19937 curr_rng(seeds[i]);
+
             // sample a possible world
-            PossibleWorld world = sample_world(uncertain_graph, thread_rng);
+            PossibleWorld world = sample_world(uncertain_graph, curr_rng);
 
             // compute the centralites in the sampled possible world
-            std::vector<double> centralities_world = in_world_centrality_fn(world);
+            std::vector<double> centralities_world = in_world_centrality_fn(world, curr_rng);
 
             // update the vector with the centralities for the current thread
             for (int u = 0; u < uncertain_graph.n; ++u)

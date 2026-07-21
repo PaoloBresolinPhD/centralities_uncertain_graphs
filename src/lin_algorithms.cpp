@@ -1,4 +1,5 @@
 #include "lin_algorithms.hpp"
+#include "utils.hpp"
 #include <cmath>
 
 std::vector<double> exact_lin_world(const PossibleWorld &world) {
@@ -29,21 +30,6 @@ std::vector<double> exact_lin_world(const PossibleWorld &world) {
             centralities[u] = std::pow(comp_sizes[components[u]] - 1, 2) / ((world.n - 1) * centralities[u]);
 
     return centralities;
-}
-
-std::vector<int> uniform_sample_with_replacement(const std::vector<int> &vec, int l, std::mt19937 &rng) {
-
-    // initialize the vector that will contain the sampled values
-    std::vector<int> sample(l);
-
-    // define a uniform distribution of integers in the desired range
-    std::uniform_int_distribution<int> distr(0, (int) vec.size() - 1);
-
-    // sample l values uniformly at random with replacement
-    for (int i = 0; i < l; ++i)
-        sample[i] = vec[distr(rng)];
-    
-    return sample;
 }
 
 std::vector<double> ew_lin_world(const PossibleWorld &world, int l, double c, std::mt19937 &rng)  {
@@ -102,22 +88,6 @@ std::vector<double> ew_lin_world(const PossibleWorld &world, int l, double c, st
     return centralities;
 }
 
-std::vector<int> poisson_sample(const std::vector<int> &vec, const std::vector<double> &probs, std::mt19937 &rng) {
-
-    // define the vector that will contain the sampled values
-    std::vector<int> sample;
-
-    // define a uniform distribution of probabilities
-    std::uniform_real_distribution<double> distr(0.0, 1.0);
-
-    // sample each node independently with its probability
-    for (int i = 0; i < (int) vec.size(); ++i)
-        if (distr(rng) < probs[i])
-            sample.push_back(vec[i]);
-    
-    return sample;
-}
-
 std::map<int, double> lin_pps_sample(const PossibleWorld &world, const std::vector<int> &conn_comp_nodes, int l, double p_s, std::mt19937 &rng) {
 
     // return an empty vector if the size of the connected component is <= 1
@@ -167,7 +137,7 @@ std::map<int, double> lin_pps_sample(const PossibleWorld &world, const std::vect
     return sample;
 }
 
-std::vector<double> pps_lin_world(const PossibleWorld &world, int l, int p_s_factor, std::mt19937 &rng) {
+std::vector<double> pps_lin_world(const PossibleWorld &world, int k, int l, double delta, std::mt19937 &rng) {
 
     // initialize the vector that will store the Lin's indices
     std::vector<double> centralities(world.n, 0);
@@ -188,9 +158,12 @@ std::vector<double> pps_lin_world(const PossibleWorld &world, int l, int p_s_fac
 
         // if the component is larger than l, then we sample O(l) nodes from the connected component using PPS sampling
         if (comp.second > l) {
+
+            // compute the Poisson probability p_s
+            double p_s = 2.0 / comp.second * std::log(4 * k * comp_sizes.size() / delta);
             
             // extract the PPS sample
-            std::map<int, double> map_sample = lin_pps_sample(world, comp_nodes, l, p_s_factor * (1.0 / comp.second), rng);
+            std::map<int, double> map_sample = lin_pps_sample(world, comp_nodes, l, p_s, rng);
         
             // update the centralities of all the nodes in the connected component by running a BFS from each sampled node
             for (auto &entry : map_sample) {

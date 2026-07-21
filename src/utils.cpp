@@ -168,3 +168,71 @@ void assign_uniform_edge_probs(UncertainGraph &uncertain_graph, std::mt19937 &rn
         for (auto &edge : uncertain_graph.adj[u])
             edge.prob = probs[edge.id];
 }
+
+std::vector<int> uniform_sample_with_replacement(const std::vector<int> &vec, int l, std::mt19937 &rng) {
+
+    // initialize the vector that will contain the sampled values
+    std::vector<int> sample(l);
+
+    // define a uniform distribution of integers in the desired range
+    std::uniform_int_distribution<int> distr(0, (int) vec.size() - 1);
+
+    // sample l values uniformly at random with replacement
+    for (int i = 0; i < l; ++i)
+        sample[i] = vec[distr(rng)];
+    
+    return sample;
+}
+
+std::vector<int> poisson_sample(const std::vector<int> &vec, const std::vector<double> &probs, std::mt19937 &rng) {
+
+    // define the vector that will contain the sampled values
+    std::vector<int> sample;
+
+    // define a uniform distribution of probabilities
+    std::uniform_real_distribution<double> distr(0.0, 1.0);
+
+    // sample each node independently with its probability
+    for (int i = 0; i < (int) vec.size(); ++i)
+        if (distr(rng) < probs[i])
+            sample.push_back(vec[i]);
+    
+    return sample;
+}
+
+void save_map_scalars_tsv(const std::filesystem::path &output_path, const std::map<std::string, SummaryType> &map) {
+
+    // create the output directory if it does not exist
+    if (output_path.has_parent_path())
+        std::filesystem::create_directories(output_path.parent_path());
+
+    // open the output file
+    std::ofstream file(output_path);
+
+    // set the number of digits to save per entry
+    file << std::setprecision(10);
+
+    // print the header
+    auto last_val_it = std::prev(map.end());
+    for (auto it = map.begin(); it != last_val_it; ++it)
+        file << it->first << "\t";
+    file << last_val_it->first << "\n";
+
+    // print the values in the vector
+    for (auto it = map.begin(); it != last_val_it; ++it) {
+        std::visit(
+            [&file](const auto &value) { 
+                file << value;
+            },
+            it->second
+        );
+        file << "\t";
+    }
+    std::visit(
+        [&file](const auto& val) {
+            file << val;
+        },
+        last_val_it->second
+    );
+    file << "\n";
+}
