@@ -63,4 +63,4 @@ PossibleWorld extract_backbone(const UncertainGraph &uncertain_graph);
  * 
  * @return vector of double where each component with index v stores the centrality of v in the input uncertain graph.
  */
-std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int k, const std::function<std::vector<double>(const PossibleWorld&)> &in_world_centrality_fn, std::mt19937 &rng);
+std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int k, const std::function<std::vector<double>(const PossibleWorld&, std::mt19937 &rng)> &in_world_centrality_fn, std::mt19937 &rng);

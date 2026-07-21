@@ -14,17 +14,6 @@
 std::vector<double> exact_lin_world(const PossibleWorld &world);
 
 /**
- * Samples uniformly at random with replacement l integers from the input vecor.
- * 
- * @param vec vector of int with the values from which sampling.
- * @param l number of values to sample.
- * @param rng random number generator for reproducibility.
- * 
- * @return vector of int with the sampled values.
- */
-std::vector<int> uniform_sample_with_replacement(const std::vector<int> &vec, int l, std::mt19937 &rng);
-
-/**
  * Approximates the Lin's index of all nodes in the input possible world using the Eppstein-Wang-based algorithm.
  * 
  * @param world possible world.
@@ -35,18 +24,6 @@ std::vector<int> uniform_sample_with_replacement(const std::vector<int> &vec, in
  * @return vector of double where the component with index v stores the Lin's index of v in the input possible world.
  */
 std::vector<double> ew_lin_world(const PossibleWorld &world, int l, double c, std::mt19937 &rng);
-
-/**
- * Extracts a Poisson sample from the input vector, according to the input probabilities.
- * 
- * @param vec vector of integers with the elements to sample.
- * @param probs vector of doubles with the probabilities of including elements in the Poisson sample.
- * probs[i] is the probability of including vec[i] in the Poisson sample.
- * @param rng random number generator for reproducibility.
- * 
- * @return vector of integers with the sampled nodes.
- */
-std::vector<int> poisson_sample(const std::vector<int> &vec, const std::vector<double> &probs, std::mt19937 &rng);
 
 /**
  * Extracts a PPS sample of O(l) nodes from the input connected component of the input possible world.
@@ -65,10 +42,11 @@ std::map<int, double> lin_pps_sample(const PossibleWorld &world, const std::vect
  * Approximates the Lin's index of all nodes in the input possible world using the PPS-based algorithm.
  * 
  * @param world possible world.
+ * @param k int representing the number of possible world to sample. It is required to compute p_s.
  * @param l int suggesting the number of nodes to sample in each connected component of the possible world. The number of sampled points will be O(l).
- * @param p_s_factor integer representing the factor to multiply to the Poisson probability for the initial sample, initialized to (1 / connected component size).
+ * @param delta double representing the error confidence. It is required to compute p_s.
  * @param rng random number generator for reproducibility.
  * 
  * @return vector of double where the component with index v stores the Lin's index of v in the input possible world.
  */
-std::vector<double> pps_lin_world(const PossibleWorld &world, int l, int p_s_factor, std::mt19937 &rng);
+std::vector<double> pps_lin_world(const PossibleWorld &world, int k, int l, double delta, std::mt19937 &rng);
