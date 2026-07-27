@@ -1,6 +1,9 @@
 # vs code files
 *.vscode
 
+# data
+data/
+
 # virtual environments
 *.venv
 
