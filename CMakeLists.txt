@@ -15,22 +15,23 @@ add_executable(preprocess_data
     src/preprocess_data.cpp
 )
 
-# executable that runs the mc + exact algorithm on an input dataset
-add_executable(run_lin_experiments
-    src/run_lin_experiments.cpp
+# executable that runs the experiments on an input dataset
+add_executable(run_experiments
+    src/run_experiments.cpp
     src/lin_algorithms.cpp
+    src/harmonic_algorithms.cpp
     src/uncertain_graph.cpp
     src/possible_world.cpp
 )
 
 # link the library to the executables
 target_link_libraries(preprocess_data PRIVATE centralities_lib)
-target_link_libraries(run_lin_experiments PRIVATE centralities_lib)
+target_link_libraries(run_experiments PRIVATE centralities_lib)
 
 # iterate over all executables
-foreach(target centralities_lib preprocess_data run_lin_experiments)
+foreach(target centralities_lib preprocess_data run_experiments)
 
-    # compile options: optimized with -03 or for debugging with -fsanitize
+    # compile options: optimized with -O3 or for debugging with -fsanitize
     target_compile_options(${target} PRIVATE
         $<$<CONFIG:Release>:-O3 -march=native>
         $<$<CONFIG:Debug>:-g -fsanitize=address>
