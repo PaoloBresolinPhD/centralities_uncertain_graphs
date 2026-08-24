@@ -1,0 +1,5767 @@
+Loading the graph from the file ../data/preprocessed/web-NotreDame.tsv...
+Number of nodes: 325729
+Number of edges: 1090108
+Computing an upper bound to the diameter of the input uncertain graph...
+Estimated upper bound for the diameter: 50
+Time required to estimate the upper bound: 0.348623s
+Running experiments on the lin centrality.
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 100
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 50
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running MC with the following parameters:
+n_threads: 16
+k: 20
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 10
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 5
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running EW with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+c: 2
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 100
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 50
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 100
+l: 20
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 100
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 50
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 50
+l: 20
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 100
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 50
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.1
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 0
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 1
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 2
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 3
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 4
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 4
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 5
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 5
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 6
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 6
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 7
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 7
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 8
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 8
+Saving the results...
+
+Running PPS with the following parameters:
+n_threads: 16
+k: 20
+l: 20
+delta: 0.01
+exp_rep: 9
+The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 9
+Saving the results...

@@ -1,0 +1,2 @@
+avg_error	exp_rep	k	max_error	method	min_error	n_threads	time
+0.004004919338	5	20	0.04460328464	mc	0	16	4758.70966

@@ -1,0 +1,2 @@
+avg_error	delta	exp_rep	k	l	max_error	method	min_error	n_threads	time
+0.007522735736	0.01	3	20	100	0.08559953465	pps	0	16	3.084107597
