@@ -13,16 +13,20 @@ def parse_args():
     # add the arguments
     parser.add_argument("-i", "--input_dir", required=True, type=str, help="Path to the directory with all produced results to load.")
     parser.add_argument("-o", "--output_dir", required=True, type=str, help="Path to the directory where to store the plots.")
+    parser.add_argument("-m", "--measure", required=True, type=str, help="Centrality measure to consider. Can be either 'lin' or 'harmonic'.")
 
     return parser.parse_args()
 
-def plot_times_threads(input_df, k, k_baseline, l, c, delta, output_path):
+def plot_times_threads(input_df, measure, k, k_baseline, l, c, delta, output_path):
 
     # extract only the required data
     columns_to_keep = ["method", "time", "n_threads"]
     mc_baseline_df = input_df[(input_df["method"] == "mc_baseline") & (input_df["k"] == k_baseline)][columns_to_keep]
     mc_df = input_df[(input_df["method"] == "mc") & (input_df["k"] == k)][columns_to_keep]
-    ew_df = input_df[(input_df["method"] == "ew") & (input_df["k"] == k) & (input_df["l"] == l) & (input_df["c"] == c)][columns_to_keep]
+    if measure == "lin":
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["k"] == k) & (input_df["l"] == l) & (input_df["c"] == c)][columns_to_keep]
+    else:
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["k"] == k) & (input_df["l"] == l)][columns_to_keep]
     pps_df = input_df[(input_df["method"] == "pps") & (input_df["k"] == k) & (input_df["l"] == l) & (input_df["delta"] == delta)][columns_to_keep]
     plot_df = pd.concat([mc_baseline_df, mc_df, ew_df, pps_df], ignore_index=True)
 
@@ -41,12 +45,15 @@ def plot_times_threads(input_df, k, k_baseline, l, c, delta, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     plt.savefig(output_path)
 
-def plot_times_k(input_df, n_threads, l, c, delta, output_path):
+def plot_times_k(input_df, measure, n_threads, l, c, delta, output_path):
 
     # extract only the required data
     columns_to_keep = ["method", "time", "k"]
     mc_df = input_df[(input_df["method"] == "mc") & (input_df["n_threads"] == n_threads)][columns_to_keep]
-    ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["l"] == l) & (input_df["c"] == c)][columns_to_keep]
+    if measure == "lin":
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["l"] == l) & (input_df["c"] == c)][columns_to_keep]
+    else:
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["l"] == l)][columns_to_keep]
     pps_df = input_df[(input_df["method"] == "pps") & (input_df["n_threads"] == n_threads) & (input_df["l"] == l) & (input_df["delta"] == delta)][columns_to_keep]
     plot_df = pd.concat([mc_df, ew_df, pps_df], ignore_index=True)
 
@@ -65,11 +72,14 @@ def plot_times_k(input_df, n_threads, l, c, delta, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     plt.savefig(output_path)
 
-def plot_times_l(input_df, k, n_threads, c, delta, output_path):
+def plot_times_l(input_df, measure, k, n_threads, c, delta, output_path):
 
     # extract only the required data
     columns_to_keep = ["method", "time", "l"]
-    ew_df = input_df[(input_df["method"] == "ew") & (input_df["k"] == k) & (input_df["n_threads"] == n_threads) & (input_df["c"] == c)][columns_to_keep]
+    if measure == "lin":
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["k"] == k) & (input_df["n_threads"] == n_threads) & (input_df["c"] == c)][columns_to_keep]
+    else:
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["k"] == k) & (input_df["n_threads"] == n_threads)][columns_to_keep]
     pps_df = input_df[(input_df["method"] == "pps") & (input_df["k"] == k) & (input_df["n_threads"] == n_threads) & (input_df["delta"] == delta)][columns_to_keep]
     plot_df = pd.concat([ew_df, pps_df], ignore_index=True)
 
@@ -88,12 +98,15 @@ def plot_times_l(input_df, k, n_threads, c, delta, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     plt.savefig(output_path)
 
-def plot_errors_k(input_df, n_threads, l, c, delta, output_path):
+def plot_errors_k(input_df, measure, n_threads, l, c, delta, output_path):
 
     # extract only the required data
     columns_to_keep = ["method", "k", "avg_error"]
     mc_df = input_df[(input_df["method"] == "mc") & (input_df["n_threads"] == n_threads)][columns_to_keep]
-    ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["l"] == l) & (input_df["c"] == c)][columns_to_keep]
+    if measure == "lin":
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["l"] == l) & (input_df["c"] == c)][columns_to_keep]
+    else:
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["l"] == l)][columns_to_keep]
     pps_df = input_df[(input_df["method"] == "pps") & (input_df["n_threads"] == n_threads) & (input_df["l"] == l) & (input_df["delta"] == delta)][columns_to_keep]
     plot_df = pd.concat([mc_df, ew_df, pps_df], ignore_index=True)
 
@@ -112,11 +125,14 @@ def plot_errors_k(input_df, n_threads, l, c, delta, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     plt.savefig(output_path)
 
-def plot_errors_l(input_df, n_threads, k, c, delta, output_path):
+def plot_errors_l(input_df, measure, n_threads, k, c, delta, output_path):
 
     # extract only the required data
     columns_to_keep = ["method", "l", "avg_error"]
-    ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["k"] == k) & (input_df["c"] == c)][columns_to_keep]
+    if measure == "lin":
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["k"] == k) & (input_df["c"] == c)][columns_to_keep]
+    else:
+        ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["k"] == k)][columns_to_keep]
     pps_df = input_df[(input_df["method"] == "pps") & (input_df["n_threads"] == n_threads) & (input_df["k"] == k) & (input_df["delta"] == delta)][columns_to_keep]
     plot_df = pd.concat([ew_df, pps_df], ignore_index=True)
 
@@ -145,22 +161,22 @@ if __name__ == "__main__":
     summaries_df = pd.concat([pd.read_csv(f, sep="\t") for f in input_path.rglob("summary.tsv")], ignore_index=True, join="outer")
     
     # plot how the running time changes as the number of threads changes, for fixed other values
-    k = 25
+    k = 100
     k_baseline = 500
-    l = 25
+    l = 100
     c = 5
     delta = 0.01
-    plot_times_threads(summaries_df, k=k, k_baseline=k_baseline, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_threads__k_{k}_k_baseline_{k_baseline}_l_{l}_c_{c}_delta{delta}.pdf"))
+    plot_times_threads(summaries_df, measure=args.measure, k=k, k_baseline=k_baseline, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_threads__k_{k}_k_baseline_{k_baseline}_l_{l}_c_{c}_delta_{delta}.pdf"))
 
     # plot how the running time changes as k changes, for fixed other values
     n_threads = 16
-    plot_times_k(summaries_df, n_threads=n_threads, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_k__threads_{n_threads}_l_{l}_c_{c}_delta{delta}.pdf"))
+    plot_times_k(summaries_df, measure=args.measure, n_threads=n_threads, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_k__threads_{n_threads}_l_{l}_c_{c}_delta_{delta}.pdf"))
 
     # plot how the running time changes as l changes, for fixed other values
-    plot_times_l(summaries_df, k=k, n_threads=n_threads, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_l__k_{k}_n_threads_{n_threads}_c_{c}_delta{delta}.pdf"))
+    plot_times_l(summaries_df, measure=args.measure, k=k, n_threads=n_threads, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"times_over_l__k_{k}_n_threads_{n_threads}_c_{c}_delta_{delta}.pdf"))
 
     # plot how the error changes as k changes, for fixed other values
-    plot_errors_k(summaries_df, n_threads=n_threads, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"errors_over_k__threads_{n_threads}_l_{l}_c_{c}_delta{delta}.pdf"))
+    plot_errors_k(summaries_df, measure=args.measure, n_threads=n_threads, l=l, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"errors_over_k__threads_{n_threads}_l_{l}_c_{c}_delta_{delta}.pdf"))
 
     # plot how the error changes as l changes, for fixed other values
-    plot_errors_l(summaries_df, n_threads=n_threads, k=k, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"errors_over_l__threads_{n_threads}_k_{k}_c_{c}_delta{delta}.pdf"))
+    plot_errors_l(summaries_df, measure=args.measure, n_threads=n_threads, k=k, c=c, delta=delta, output_path=os.path.join(args.output_dir, f"errors_over_l__threads_{n_threads}_k_{k}_c_{c}_delta_{delta}.pdf"))

@@ -13,15 +13,26 @@ std::vector<double> exact_lin_world(const PossibleWorld &world) {
     // compute the number of nodes in each connected component
     std::map<int, int> comp_sizes = components_sizes(components);
 
+    // initialize the vector that will contain the distances from each node to all other nodes in the input possible world
+    std::vector<int> distances(world.n, -1);
+
+    // initialize the vector that will contain the nodes reached fromm a bfs call
+    std::vector<int> reached_nodes;
+    reached_nodes.reserve(world.n);
+
     // iterate through all the nodes
     for (int u = 0; u < world.n; ++u) {
 
         // perform a bfs from u
-        std::map<int, int> distances = bfs_distances(world, u);
+        bfs_distances(world, u, distances, reached_nodes);
 
         // update the centralities of all nodes reached by the bfs
-        for (auto reached : distances)
-            centralities[reached.first] += reached.second;
+        for (int reached : reached_nodes)
+            centralities[reached] += distances[reached];
+
+        // reset the distances of the reached nodes to the sentinel value -1
+        for (int reached : reached_nodes)
+            distances[reached] = -1;
     }
 
     // compute the actual Lin's indices
@@ -40,6 +51,13 @@ std::vector<double> ew_lin_world(const PossibleWorld &world, int l, double c, st
     // find the connected component to which each node belongs and the sizes of the connected components
     std::vector<int> node_components = connected_components(world);
     std::map<int, int> comp_sizes = components_sizes(node_components);
+
+    // initialize the vector that will contain the distances from each sampled node to all other nodes in the input possible world
+    std::vector<int> distances(world.n, -1);
+
+    // initialize the vector that will contain the nodes reached fromm a bfs call
+    std::vector<int> reached_nodes;
+    reached_nodes.reserve(world.n);
 
     // iterate through each connected component
     for (auto &comp : comp_sizes) {
@@ -63,9 +81,11 @@ std::vector<double> ew_lin_world(const PossibleWorld &world, int l, double c, st
             
             // update the centralities of all the ndoes in the connected component by runnign a BFS from each node in the bfs_nodes vector
             for (int u : bfs_nodes) {
-                std::map<int, int> distances = bfs_distances(world, u);
-                for (auto &reached : distances)
-                    centralities[reached.first] += reached.second;
+                bfs_distances(world, u, distances, reached_nodes);
+                for (int reached : reached_nodes)
+                    centralities[reached] += distances[reached];
+                for (int reached : reached_nodes)
+                    distances[reached] = -1;
             }
 
             // normalize the centralities
@@ -102,20 +122,31 @@ std::map<int, double> lin_pps_sample(const PossibleWorld &world, const std::vect
     for (int u : conn_comp_nodes)
         gamma[u] = 1.0 / conn_comp_nodes.size();
 
+    // initialize the vector that will contain the distances from each sampled node to all other nodes in the input possible world
+    std::vector<int> distances(world.n, -1);
+
+    // initialize the vector that will contain the nodes reached fromm a bfs call
+    std::vector<int> reached_nodes;
+    reached_nodes.reserve(world.n);
+
     // iterate through the nodes of the Poisson sample
     for (int u : initial_poisson_sample) {
 
         // compute the distances from u to all the nodes in the considered connected component
-        std::map<int, int> distances = bfs_distances(world, u);
+        bfs_distances(world, u, distances, reached_nodes);
 
         // compute the sum of distances from u to all the nodes in the same connected component
         double sum_distances = 0.0;
-        for (auto &entry : distances)
-            sum_distances += entry.second;
+        for (int reached : reached_nodes)
+            sum_distances += distances[reached];
         
         // update the pps values of all the nodes in the connected component    
         for (int v : conn_comp_nodes)
             gamma[v] = std::max(gamma[v], distances[v] / sum_distances);
+
+        // reset the distances of the reached nodes to the sentinel value -1
+        for (int reached : reached_nodes)
+            distances[reached] = -1;
     }
 
     // normalize the pps probabilities
@@ -146,6 +177,13 @@ std::vector<double> pps_lin_world(const PossibleWorld &world, int k, int l, doub
     std::vector<int> node_components = connected_components(world);
     std::map<int, int> comp_sizes = components_sizes(node_components);
 
+    // initialize the vector that will contain the distances from each sampled node to all other nodes in the input possible world
+    std::vector<int> distances(world.n, -1);
+
+    // initialize the vector that will contain the nodes reached fromm a bfs call
+    std::vector<int> reached_nodes;
+    reached_nodes.reserve(world.n);
+
     // iterate through each connected component
     for (auto &comp : comp_sizes) {
 
@@ -167,18 +205,22 @@ std::vector<double> pps_lin_world(const PossibleWorld &world, int k, int l, doub
         
             // update the centralities of all the nodes in the connected component by running a BFS from each sampled node
             for (auto &entry : map_sample) {
-                std::map<int, int> distances = bfs_distances(world, entry.first);
-                for (auto &reached : distances)
-                    centralities[reached.first] += reached.second / entry.second;
+                bfs_distances(world, entry.first, distances, reached_nodes);
+                for (int reached : reached_nodes)
+                    centralities[reached] += distances[reached] / entry.second;
+                for (int reached : reached_nodes)
+                    distances[reached] = -1;
             }
         }
 
         // else, run a bfs from each node in the current connected component and compute the exact centrality values for the nodes
         else {
             for (int u : comp_nodes) {
-                std::map<int, int> distances = bfs_distances(world, u);
-                for (auto &reached : distances)
-                    centralities[reached.first] += reached.second;
+                bfs_distances(world, u, distances, reached_nodes);
+                for (int reached : reached_nodes)
+                    centralities[reached] += distances[reached];
+                for (int reached : reached_nodes)
+                    distances[reached] = -1;
             }
         }
 

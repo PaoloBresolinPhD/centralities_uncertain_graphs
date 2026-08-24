@@ -3,39 +3,40 @@
 #include <cmath>
 #include <climits>
 
-std::map<int, int> bfs_distances(const PossibleWorld &world, int u) {
+void bfs_distances(const PossibleWorld &world, int u, std::vector<int> &distances, std::vector<int> &reached_nodes) {
     
-    // initialize the map that will contain (node, distance) pairs
-    std::map<int, int> distances;
+    // clear the vector with reached nodes
+    reached_nodes.clear();
 
-    // initialize the queue of the bfs with the source node u
-    std::queue<int> queue;
-    queue.push(u);
+    // add the the source node to the vector
+    reached_nodes.push_back(u);
 
-    // set to 0 the distance from u to itself
+    // index of the next node to be expanded in the bfs
+    int head = 0;
+
+    // set the distance from u to itself to 0
     distances[u] = 0;
 
     // perform a bfs starting from u
-    while (!queue.empty()) {
+    while (head < (int) reached_nodes.size()) {
 
-        // dequeue the next node
-        int v = queue.front();
-        queue.pop();
+        // get the next node to expand
+        int v = reached_nodes[head++];
 
-        // iterate through its neighbors
+        // iterate through the neighbors of the node to expand
         for (int w : world.adj[v]) {
 
             // visit the node only if not visited yet
-            if (distances.find(w) == distances.end()) {
+            if (distances[w] == -1) {
                 
-                // store the distance from u to w and enqueue w
+                // store the distance from u to w
                 distances[w] = distances[v] + 1;
-                queue.push(w);
+                
+                // insert w among the reached nodes
+                reached_nodes.push_back(w);
             }
         }
     }
-
-    return distances;
 }
 
 std::vector<bool> bfs_reachability(const PossibleWorld &world, int u) {
@@ -135,6 +136,13 @@ int upper_bound_max_diameter(const PossibleWorld &world, int h, std::mt19937 &rn
     // initialize the variable that will contain the maximum across all connected components of the minimum of the maximum distances from the sampled nodes
     int diameter_ub = 0;
 
+    // initialize the vector that will contain the distances from each sampled node to all other nodes in the input possible world
+    std::vector<int> distances(world.n, -1);
+
+    // initialize the vector that will contain the nodes reached fromm a bfs call
+    std::vector<int> reached_nodes;
+    reached_nodes.reserve(world.n);
+
     // iterate through the connected components
     for (auto &curr_comp : comps_map) {
 
@@ -148,20 +156,24 @@ int upper_bound_max_diameter(const PossibleWorld &world, int h, std::mt19937 &rn
         for (int i = 0; i < h; ++i) {
 
             // compute the distances from a node sampled uniformly at random and all the other nodes in the connected component
-            std::map<int, int> curr_distances = bfs_distances(world, curr_comp.second[distr(rng)]);
+            bfs_distances(world, curr_comp.second[distr(rng)], distances, reached_nodes);
 
             // find the maximum distance
             int curr_max_dist = 0;
-            for (auto &reached : curr_distances) {
-                if (reached.second > curr_max_dist)
-                    curr_max_dist = reached.second;
-                if (reached.second > min_ub_comp)
+            for (int reached : reached_nodes) {
+                if (distances[reached] > curr_max_dist)
+                    curr_max_dist = distances[reached];
+                if (distances[reached] > min_ub_comp)
                     break;
             }
 
             // update the minimum across all sampled nodes
             if (curr_max_dist < min_ub_comp)
                 min_ub_comp = curr_max_dist;   
+            
+            // reset the distances of the nodes reached by the bfs to the sentinel value -1
+            for (int reached : reached_nodes)
+                distances[reached] = -1;
         }
 
         // if the minimum found upper bound is larger than the the upper bound found in the connected components found so far, then update it
