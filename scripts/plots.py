@@ -40,6 +40,7 @@ def plot_times_threads(input_df, measure, k, k_baseline, l, c, delta, output_pat
     plt.title("Running Time Over Threads")
     plt.xlabel("Number of Threads")
     plt.ylabel("Time (s)")
+    plt.yscale("log")
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -67,6 +68,7 @@ def plot_times_k(input_df, measure, n_threads, l, c, delta, output_path):
     plt.title("Running Time Over k")
     plt.xlabel("Number of Sampled Possible Worlds (k)")
     plt.ylabel("Time (s)")
+    plt.yscale("log")
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -82,6 +84,7 @@ def plot_times_l(input_df, measure, k, n_threads, c, delta, output_path):
         ew_df = input_df[(input_df["method"] == "ew") & (input_df["k"] == k) & (input_df["n_threads"] == n_threads)][columns_to_keep]
     pps_df = input_df[(input_df["method"] == "pps") & (input_df["k"] == k) & (input_df["n_threads"] == n_threads) & (input_df["delta"] == delta)][columns_to_keep]
     plot_df = pd.concat([ew_df, pps_df], ignore_index=True)
+    plot_df["l"] = plot_df["l"].astype(int)
 
     # plot the dataframe
     plt.close()
@@ -93,6 +96,7 @@ def plot_times_l(input_df, measure, k, n_threads, c, delta, output_path):
     plt.title("Running Time Over l")
     plt.xlabel("Number of Sampled Nodes (l)")
     plt.ylabel("Time (s)")
+    plt.yscale("log")
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -135,6 +139,7 @@ def plot_errors_l(input_df, measure, n_threads, k, c, delta, output_path):
         ew_df = input_df[(input_df["method"] == "ew") & (input_df["n_threads"] == n_threads) & (input_df["k"] == k)][columns_to_keep]
     pps_df = input_df[(input_df["method"] == "pps") & (input_df["n_threads"] == n_threads) & (input_df["k"] == k) & (input_df["delta"] == delta)][columns_to_keep]
     plot_df = pd.concat([ew_df, pps_df], ignore_index=True)
+    plot_df["l"] = plot_df["l"].astype(int)
 
     # plot the dataframe
     plt.close()
