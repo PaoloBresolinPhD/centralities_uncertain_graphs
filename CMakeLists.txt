@@ -24,12 +24,20 @@ add_executable(run_experiments
     src/possible_world.cpp
 )
 
+# executable that computes the distribution of node distances
+add_executable(distances_distribution
+    src/distances_distribution.cpp
+    src/uncertain_graph.cpp
+    src/possible_world.cpp
+)
+
 # link the library to the executables
 target_link_libraries(preprocess_data PRIVATE centralities_lib)
 target_link_libraries(run_experiments PRIVATE centralities_lib)
+target_link_libraries(distances_distribution PRIVATE centralities_lib)
 
 # iterate over all executables
-foreach(target centralities_lib preprocess_data run_experiments)
+foreach(target centralities_lib preprocess_data run_experiments distances_distribution)
 
     # compile options: optimized with -O3 or for debugging with -fsanitize
     target_compile_options(${target} PRIVATE
