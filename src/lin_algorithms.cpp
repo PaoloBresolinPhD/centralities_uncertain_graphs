@@ -55,7 +55,7 @@ std::vector<double> ew_lin_world(const PossibleWorld &world, int l, double c, st
     // initialize the vector that will contain the distances from each sampled node to all other nodes in the input possible world
     std::vector<int> distances(world.n, -1);
 
-    // initialize the vector that will contain the nodes reached fromm a bfs call
+    // initialize the vector that will contain the nodes reached from a bfs call
     std::vector<int> reached_nodes;
     reached_nodes.reserve(world.n);
 

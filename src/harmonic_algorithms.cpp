@@ -10,7 +10,7 @@ std::vector<double> exact_harmonic_world(const PossibleWorld &world) {
     // initialize the vector that will contain the distances from each node to all other nodes in the input possible world
     std::vector<int> distances(world.n, -1);
 
-    // initialize the vector that will contain the nodes reached fromm a bfs call
+    // initialize the vector that will contain the nodes reached from a bfs call
     std::vector<int> reached_nodes;
     reached_nodes.reserve(world.n);
 

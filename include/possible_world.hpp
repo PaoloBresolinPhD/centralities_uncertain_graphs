@@ -24,10 +24,11 @@ struct PossibleWorld {
  * 
  * @param world possible world.
  * @param u source node.
+ * @param distances pre-allocated vector that will contain the distances from u to any reachable node.
+ * @param reached_nodes pre-allocated vector that will contain the nodes reached from u in the input possible world.
  * 
- * @return map where the first element of each entry is the id of a node reached by the BFS from u and the second element is the distance from u to the node.
  */
-std::map<int, int> bfs_distances(const PossibleWorld &world, int u);
+void bfs_distances(const PossibleWorld &world, int u, std::vector<int> &distances, std::vector<int> &reached_nodes);
 
 /**
  * Finds all nodes reachable from u in the input possible world.
