@@ -89,14 +89,16 @@ std::vector<double> ew_lin_world(const PossibleWorld &world, int l, double c, st
             }
 
             // normalize the centralities
-            if (comp.second > l)
+            if (comp.second > l) {
                 for (int u : comp_nodes)
                     if (centralities[u] > 0)
                         centralities[u] = l * std::pow(comp.second - 1, 2) / ( (world.n - 1) * centralities[u] * comp.second );
-            else
+            }
+            else {
                 for (int u : comp_nodes)
                     if (centralities[u] > 0)
                         centralities[u] = std::pow(comp.second - 1, 2) / ( (world.n - 1) * centralities[u] );
+            }
             
             // clamp the centralities to the maximum possible value            
             for (int u : comp_nodes)

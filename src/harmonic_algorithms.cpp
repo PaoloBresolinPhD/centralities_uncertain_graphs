@@ -73,14 +73,16 @@ std::vector<double> ew_harmonic_world(const PossibleWorld &world, int l, std::mt
     }
 
     // normalize the centralities
-    if (world.n > l)
+    if (world.n > l) {
         for (int u = 0; u < world.n; ++u)
             if (centralities[u] > 0)
                 centralities[u] *= ((double) world.n / l / (world.n - 1));
-    else
+    }
+    else {
         for (int u = 0; u < world.n; ++u)
             if (centralities[u] > 0)
                 centralities[u] /= (world.n - 1);
+    }
     
     // clamp the centralities to the maximum possible value            
     for (int u = 0; u < world.n; ++u)
