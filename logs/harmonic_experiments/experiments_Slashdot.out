@@ -1,9 +1,9 @@
-Loading the graph from the file ../data/preprocessed/ChG-Miner_miner-chem-gene.tsv...
-Number of nodes: 7341
-Number of edges: 15138
+Loading the graph from the file ../data/preprocessed/soc-Slashdot0902.tsv...
+Number of nodes: 82168
+Number of edges: 504230
 Computing an upper bound to the diameter of the input uncertain graph...
-Estimated upper bound for the diameter: 22
-Time required to estimate the upper bound: 0.00483721s
+Estimated upper bound for the diameter: 16
+Time required to estimate the upper bound: 0.0822448s
 Running experiments on the harmonic centrality.
 
 Running MC baseline with the following parameters:

@@ -1,0 +1,24 @@
+Loading the graph from the file ../data/preprocessed/web-NotreDame.tsv...
+Number of nodes: 325729
+Number of edges: 1090108
+Computing an upper bound to the diameter of the input uncertain graph...
+Estimated upper bound for the diameter: 50
+Time required to estimate the upper bound: 0.480079s
+Running experiments on the harmonic centrality.
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 0
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 1
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 2
