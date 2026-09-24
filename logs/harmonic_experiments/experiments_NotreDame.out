@@ -22,3 +22,9 @@ Running MC baseline with the following parameters:
 n_threads: 16
 k: 500
 exp_rep: 2
+Saving the results...
+
+Running MC baseline with the following parameters:
+n_threads: 16
+k: 500
+exp_rep: 3
