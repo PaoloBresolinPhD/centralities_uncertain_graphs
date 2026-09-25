@@ -36,10 +36,10 @@ PossibleWorld sample_world(const UncertainGraph &uncertain_graph, std::mt19937 &
     return world;
 }
 
-std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int k, const std::function<std::vector<double>(const PossibleWorld&, std::mt19937 &rng)> &in_world_centrality_fn, std::mt19937 &rng) {
+std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncertain_graph, int query_size, int k, const std::function<std::vector<double>(const PossibleWorld&, std::mt19937 &rng)> &in_world_centrality_fn, std::mt19937 &rng) {
 
     // initialize the centralities computed in the possible worlds
-    std::vector<double> centralities_uncertain(uncertain_graph.n, 0.0);
+    std::vector<double> centralities_uncertain(query_size, 0.0);
 
     // generate a different random seed for each possible world to generate
     std::vector<uint32_t> seeds(k);
@@ -50,7 +50,7 @@ std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncert
     #pragma omp parallel
     {
         // vector that stores the centralieties computed by a signle thread
-        std::vector<double> thread_centralities(uncertain_graph.n, 0.0);
+        std::vector<double> thread_centralities(query_size, 0.0);
         
         // iterate through k sampled possible worlds
         #pragma omp for schedule(dynamic)
@@ -66,19 +66,19 @@ std::vector<double> mc_centralities_uncertain_graph(const UncertainGraph &uncert
             std::vector<double> centralities_world = in_world_centrality_fn(world, curr_rng);
 
             // update the vector with the centralities for the current thread
-            for (int u = 0; u < uncertain_graph.n; ++u)
+            for (int u = 0; u < query_size; ++u)
                 thread_centralities[u] += centralities_world[u];
             
         }
 
         // update the vector shared among all threads, waiting until no thread is writing
         #pragma omp critical
-        for (int u = 0; u < uncertain_graph.n; ++u)
+        for (int u = 0; u < query_size; ++u)
                 centralities_uncertain[u] += thread_centralities[u];
     }
 
     // take the mean of the computed centralities
-    for (int u = 0; u < uncertain_graph.n; ++u)
+    for (int u = 0; u < query_size; ++u)
         centralities_uncertain[u] /= k;
 
     return centralities_uncertain;

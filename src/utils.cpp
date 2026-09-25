@@ -3,6 +3,8 @@
 #include <sstream>
 #include <unordered_map>
 #include <iomanip>
+#include <algorithm>
+#include <iterator> 
 
 UncertainGraph load_uncertain_graph_no_probs(const std::string &file_path, double p) {
     
@@ -180,6 +182,18 @@ std::vector<int> uniform_sample_with_replacement(const std::vector<int> &vec, in
     // sample l values uniformly at random with replacement
     for (int i = 0; i < l; ++i)
         sample[i] = vec[distr(rng)];
+    
+    return sample;
+}
+
+std::vector<int> uniform_sample_without_replacement(const std::vector<int> &vec, int l, std::mt19937 &rng) {
+
+    // initialize the vector that will contain the sampled values
+    std::vector<int> sample;
+    sample.reserve(l);
+
+    // take a random sample without replacement of the input vector
+    std::sample(vec.begin(), vec.end(), std::back_inserter(sample), l, rng);
     
     return sample;
 }

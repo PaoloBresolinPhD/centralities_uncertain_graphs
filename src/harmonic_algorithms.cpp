@@ -54,7 +54,7 @@ std::vector<double> ew_harmonic_world(const PossibleWorld &world, int l, std::mt
     // initialize the vector that will contain the distances from each sampled node to all other nodes in the input possible world
     std::vector<int> distances(world.n, -1);
 
-    // initialize the vector that will contain the nodes reached fromm a bfs call
+    // initialize the vector that will contain the nodes reached from a bfs call
     std::vector<int> reached_nodes;
     reached_nodes.reserve(world.n);
 
@@ -62,7 +62,7 @@ std::vector<double> ew_harmonic_world(const PossibleWorld &world, int l, std::mt
     if (world.n > l)
         bfs_nodes = uniform_sample_with_replacement(nodes, l, rng);
 
-    // update the centralities of all the ndoes by runnign a BFS from each node in the bfs_nodes vector
+    // update the centralities of all the nodes by runnign a BFS from each node in the bfs_nodes vector
     for (int u : bfs_nodes) {
         bfs_distances(world, u, distances, reached_nodes);
         for (int reached : reached_nodes)
@@ -204,6 +204,136 @@ std::vector<double> pps_harmonic_world(const PossibleWorld &world, int k, int l,
         if (centralities[u] > 0) {
             centralities[u] /= (world.n - 1);
             centralities[u] = std::min(1.0, centralities[u]);
+        }
+    }
+
+    return centralities;
+}
+
+std::vector<double> exact_harmonic_world_query(const PossibleWorld &world, const std::vector<int> &query) {
+
+    // initialize the vector that will store the harmonic centralities of the query nodes
+    std::vector<double> centralities(query.size(), 0);
+    
+    // initialize the vector that will contain the distances from each node to all other nodes in the input possible world
+    std::vector<int> distances(world.n, -1);
+
+    // initialize the vector that will contain the nodes reached from a bfs call
+    std::vector<int> reached_nodes;
+    reached_nodes.reserve(world.n);
+
+    // iterate through all the query nodes
+    for (int i = 0; i < (int) query.size(); ++i) {
+
+        // perform a bfs from the current query node
+        bfs_distances(world, query[i], distances, reached_nodes);
+
+        // compute the sum of inverse distances from the current query node to all reachable nodes
+        for (int reached : reached_nodes)
+            if (distances[reached] > 0)
+                centralities[i] += 1.0 / distances[reached];
+        for (int reached : reached_nodes)
+            distances[reached] = -1;
+        
+        // compute the centrality of the current query node by normalizing the sum
+        centralities[i] /= (world.n - 1);
+    }
+
+    return centralities;
+}
+
+std::vector<double> ew_harmonic_world_query(const PossibleWorld &world, const std::vector<int> &query, int l, std::mt19937 &rng)  {
+
+    // if there are less than l query nodes, then compute the exact centralities of the nodes, as it is more efficient than sampling
+    if ((int) query.size() <= l)
+        return exact_harmonic_world_query(world, query);
+
+    // initialize the vector that will store the harmonic centralities of the query nodes
+    std::vector<double> centralities(query.size(), 0);
+
+    // initialize the vector that will contain the distances from each sampled node to all other nodes in the input possible world
+    std::vector<int> distances(world.n, -1);
+
+    // initialize the vector that will contain the nodes reached fromm a bfs call
+    std::vector<int> reached_nodes;
+    reached_nodes.reserve(world.n);
+
+    // initialize a vector with all the node ids
+    std::vector<int> nodes(world.n);
+    for (int u = 0; u < world.n; ++u)
+        nodes[u] = u;
+
+    // define the vector that will contain the nodes from which to start a BFS
+    std::vector<int> bfs_nodes;
+    
+    // sample l nodes uniformly at random from all the nodes in the input possible world
+    bfs_nodes = uniform_sample_with_replacement(nodes, l, rng);
+
+    // update the centralities of all the query nodes by runnign a BFS from each node in the bfs_nodes vector
+    for (int u : bfs_nodes) {
+        bfs_distances(world, u, distances, reached_nodes);
+        for (int i = 0; i < (int) query.size(); ++i)
+            if (distances[query[i]] > 0)
+                centralities[i] += 1.0 / distances[query[i]];
+        for (int reached : reached_nodes)
+            distances[reached] = -1;
+    }
+
+    // normalize the centralities of the query nodes
+    for (int i = 0; i < (int) query.size(); ++i) {
+        if (centralities[i] > 0) {
+            centralities[i] *= ((double) world.n / l / (world.n - 1));
+            if (centralities[i] > 1.0) {
+                centralities[i] = 1.0;
+            }
+        }
+    }
+
+    return centralities;
+}
+
+std::vector<double> pps_harmonic_world_query(const PossibleWorld &world, const std::vector<int> &query, int k, int l, double delta, std::mt19937 &rng) {
+
+    // if there are less than l query nodes, then compute the exact centralities of the nodes, as it is more efficient than sampling
+    if ((int) query.size() <= l)
+        return exact_harmonic_world_query(world, query);
+    
+    // initialize the vector that will store the harmonic centralities of the input query nodes
+    std::vector<double> centralities(query.size(), 0);
+
+    // initialize the vector that will contain the distances from each sampled node to all other nodes in the input possible world
+    std::vector<int> distances(world.n, -1);
+
+    // initialize the vector that will contain the nodes reached fromm a bfs call
+    std::vector<int> reached_nodes;
+    reached_nodes.reserve(world.n);
+
+    // compute the Poisson probability p_s
+    double p_s = 2.0 / world.n * std::log(4 * k * world.n / delta);
+
+    // create a vector with all the nodes in the input possble world
+    std::vector<int> nodes(world.n);
+    for (int u = 0; u < world.n; ++u)
+        nodes[u] = u;
+    
+    // extract the PPS sample
+    std::map<int, double> map_sample = harmonic_pps_sample(world, nodes, l, p_s, rng);
+
+    // update the centralities of the input query nodes by running a BFS from each sampled node
+    for (auto &entry : map_sample) {
+        bfs_distances(world, entry.first, distances, reached_nodes);
+        for (int i = 0; i < (int) query.size(); ++i)
+            if (distances[query[i]] > 0)
+                centralities[i] += 1.0 / (distances[query[i]] * entry.second);
+        for (int reached : reached_nodes)
+            distances[reached] = -1;
+    }
+
+    // normalize the centralities
+    for (int i = 0; i < (int) query.size(); ++i) {
+        if (centralities[i] > 0) {
+            centralities[i] /= (world.n - 1);
+            centralities[i] = std::min(1.0, centralities[i]);
         }
     }
 

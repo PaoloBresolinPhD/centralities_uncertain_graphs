@@ -17,16 +17,16 @@ std::tuple<std::vector<double>, double, double, double, double> run_method(const
 
     // run the input method
     auto start_time = std::chrono::high_resolution_clock::now();
-    std::vector<double> estimated_centralities = mc_centralities_uncertain_graph(uncertain_graph, k, in_world_centrality_fn, rng);
+    std::vector<double> estimated_centralities = mc_centralities_uncertain_graph(uncertain_graph, (int) baseline_centralities.size(), k, in_world_centrality_fn, rng);
     auto end_time = std::chrono::high_resolution_clock::now();
 
     // compute and append the time required to compute the centralities in seconds
     std::chrono::duration<double> elapsed_time = end_time - start_time;
 
     // compute the centralities errors and add them to the table
-    std::vector<double> centralities_errors(uncertain_graph.n);
-    for (int u = 0; u < uncertain_graph.n; ++u)
-        centralities_errors[u] = std::abs(baseline_centralities[u] - estimated_centralities[u]);
+    std::vector<double> centralities_errors(estimated_centralities.size());
+    for (int i = 0; i < (int) estimated_centralities.size(); ++i)
+        centralities_errors[i] = std::abs(baseline_centralities[i] - estimated_centralities[i]);
 
     // compute the minimum, maximum and average error
     auto min_max_pair = std::minmax_element(centralities_errors.begin(), centralities_errors.end());
@@ -39,13 +39,17 @@ std::tuple<std::vector<double>, double, double, double, double> run_method(const
     return std::tuple<std::vector<double>, double, double, double, double>(centralities_errors, elapsed_time.count(), min_error, max_error, avg_error);
 }
 
-void run_single_exact_experiment(const UncertainGraph &uncertain_graph, const std::filesystem::path &output_dir_path, const std::string &centrality, int k, std::mt19937 &rng, int exp_rep, int n_threads) {
+void run_single_exact_experiment(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &output_dir_path, const std::string &centrality, int k, std::mt19937 &rng, int exp_rep, int n_threads) {
 
     // map that will contain the data to store in the summary tsv
     std::map<std::string, SummaryType> summary_map;
     
     // update the summary map with experiment information
     summary_map["method"] = "mc_baseline";
+    if (query.empty())
+        summary_map["query_size"] = -1;
+    else
+        summary_map["query_size"] = (int) query.size();
     summary_map["exp_rep"] = exp_rep;
     summary_map["k"] = k;
     summary_map["n_threads"] = n_threads;
@@ -54,15 +58,24 @@ void run_single_exact_experiment(const UncertainGraph &uncertain_graph, const st
     omp_set_num_threads(n_threads);
 
     // initialize the function that computes the exact centrality in a sampled possible world
-    auto exact_fn = [centrality](const PossibleWorld &world, std::mt19937 &rng) {
-        if (centrality == "lin")
-            return exact_lin_world(world);
-        return exact_harmonic_world(world);
+    auto exact_fn = [centrality, query](const PossibleWorld &world, std::mt19937 &rng) {
+        if (centrality == "lin") {
+            if (query.empty())
+                return exact_lin_world(world);
+            else
+                return exact_lin_world_query(world, query);
+        }
+        else {
+            if (query.empty())
+                return exact_harmonic_world(world);
+            else
+                return exact_harmonic_world_query(world, query);;
+        }
     };
 
     // run the exact algorithm
     auto start_time_exact = std::chrono::high_resolution_clock::now();
-    std::vector<double> exact_centralities_baseline = mc_centralities_uncertain_graph(uncertain_graph, k, exact_fn, rng);
+    std::vector<double> exact_centralities_baseline = mc_centralities_uncertain_graph(uncertain_graph, (int) query.size(), k, exact_fn, rng);
     auto end_time_exact = std::chrono::high_resolution_clock::now();
 
     // compute and store the time required to compute the centralities
@@ -73,14 +86,21 @@ void run_single_exact_experiment(const UncertainGraph &uncertain_graph, const st
     std::cout << "Saving the results..." << std::endl;
     std::filesystem::path centralities_path = output_dir_path / "centralities.tsv";
     std::vector<std::string> col_names = {"node_id", "centrality"};
-    save_vector_tsv(centralities_path, exact_centralities_baseline, col_names);
+    if (query.empty()) {
+        std::vector<int> nodes(uncertain_graph.n);
+        for (int i = 0; i < uncertain_graph.n; ++i)
+            nodes[i] = i;
+        save_aligned_vectors_tsv(centralities_path, nodes, exact_centralities_baseline, col_names);
+    }
+    else
+        save_aligned_vectors_tsv(centralities_path, query, exact_centralities_baseline, col_names);
 
     // save the summary map in tsv format
     std::filesystem::path summary_map_path = output_dir_path / "summary.tsv";
     save_map_scalars_tsv(summary_map_path, summary_map);
 }
 
-void run_multiple_repeated_exact_experiments(const UncertainGraph &uncertain_graph, const std::filesystem::path &results_dir_path, const std::string &centrality, const std::vector<int> &k_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
+void run_multiple_repeated_exact_experiments(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &results_dir_path, const std::string &centrality, const std::vector<int> &k_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
 
     // run an experiment for each configuration of input parameters
     for (int n_threads : n_threads_values) {
@@ -92,30 +112,41 @@ void run_multiple_repeated_exact_experiments(const UncertainGraph &uncertain_gra
 
                 // print some information about the current experiment
                 std::cout << "\nRunning MC baseline with the following parameters:" << std::endl;
+                if (!query.empty())
+                    std::cout << "query_size: " << std::to_string(query.size()) << std::endl;
                 std::cout << "n_threads: " << n_threads << std::endl;
                 std::cout << "k: " << k << std::endl;
                 std::cout << "exp_rep: " << exp_rep << std::endl;
 
                 // path where to save the results of the current experiment
-                std::filesystem::path exp_path = results_dir_path / "mc_baseline" / ("threads_" + std::to_string(n_threads)) / ("k_" + std::to_string(k)) / ("rep_" + std::to_string(exp_rep));
+                std::string query_string;
+                if (query.empty())
+                    query_string = "query_size_all";
+                else
+                    query_string = "query_size_" + std::to_string(query.size());
+                std::filesystem::path exp_path = results_dir_path / "mc_baseline" / query_string / ("threads_" + std::to_string(n_threads)) / ("k_" + std::to_string(k)) / ("rep_" + std::to_string(exp_rep));
 
                 // create the directories if they do not exist yet
                 std::filesystem::create_directories(exp_path);
 
                 // run the experiment
-                run_single_exact_experiment(uncertain_graph, exp_path, centrality, k, rng, exp_rep, n_threads);
+                run_single_exact_experiment(uncertain_graph, query, exp_path, centrality, k, rng, exp_rep, n_threads);
             }
         }
     }
 }
 
-void run_single_mc_experiment(const UncertainGraph &uncertain_graph, const std::filesystem::path &output_dir_path, const std::string &centrality, const std::vector<double> &centralities_baseline, int k, std::mt19937 &rng, int exp_rep, int n_threads) {
+void run_single_mc_experiment(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &output_dir_path, const std::string &centrality, const std::vector<double> &centralities_baseline, int k, std::mt19937 &rng, int exp_rep, int n_threads) {
 
     // map that will contain the data to store in the summary tsv
     std::map<std::string, SummaryType> summary_map;
     
     // update the summary map with experiment information
     summary_map["method"] = "mc";
+    if (query.empty())
+        summary_map["query_size"] = -1;
+    else
+        summary_map["query_size"] = (int) query.size();
     summary_map["exp_rep"] = exp_rep;
     summary_map["k"] = k;
     summary_map["n_threads"] = n_threads;
@@ -124,10 +155,19 @@ void run_single_mc_experiment(const UncertainGraph &uncertain_graph, const std::
     omp_set_num_threads(n_threads);
 
     // initialize the function that computes the exact centrality in a sampled possible world
-    auto exact_fn = [centrality](const PossibleWorld &world, std::mt19937 &rng) {
-        if (centrality == "lin")
-            return exact_lin_world(world);
-        return exact_harmonic_world(world);
+    auto exact_fn = [centrality, query](const PossibleWorld &world, std::mt19937 &rng) {
+        if (centrality == "lin") {
+            if (query.empty())
+                return exact_lin_world(world);
+            else
+                return exact_lin_world_query(world, query);
+        }
+        else {
+            if (query.empty())
+                return exact_harmonic_world(world);
+            else
+                return exact_harmonic_world_query(world, query);
+        }
     };
 
     // run the mc algorithm
@@ -143,14 +183,21 @@ void run_single_mc_experiment(const UncertainGraph &uncertain_graph, const std::
     std::cout << "Saving the results..." << std::endl;
     std::filesystem::path errors_path = output_dir_path / "errors.tsv";
     std::vector<std::string> col_names = {"node_id", "error"};
-    save_vector_tsv(errors_path, mc_errors, col_names);
+    if (query.empty()) {
+        std::vector<int> nodes(uncertain_graph.n);
+        for (int i = 0; i < uncertain_graph.n; ++i)
+            nodes[i] = i;
+        save_aligned_vectors_tsv(errors_path, nodes, mc_errors, col_names);
+    }
+    else
+        save_aligned_vectors_tsv(errors_path, query, mc_errors, col_names);
 
     // save the summary map in tsv format
     std::filesystem::path summary_map_path = output_dir_path / "summary.tsv";
     save_map_scalars_tsv(summary_map_path, summary_map);
 }
 
-void run_multiple_repeated_mc_experiments(const UncertainGraph &uncertain_graph, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
+void run_multiple_repeated_mc_experiments(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
 
     // run an experiment for each configuration of input parameters
     for (int n_threads : n_threads_values) {
@@ -162,46 +209,60 @@ void run_multiple_repeated_mc_experiments(const UncertainGraph &uncertain_graph,
 
                 // print some information about the current experiment
                 std::cout << "\nRunning MC with the following parameters:" << std::endl;
+                if (!query.empty())
+                    std::cout << "query_size: " << std::to_string(query.size()) << std::endl;
                 std::cout << "n_threads: " << n_threads << std::endl;
                 std::cout << "k: " << k << std::endl;
                 std::cout << "exp_rep: " << exp_rep << std::endl;
                 std::cout << "The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:" << std::endl;
+                if (!query.empty())
+                    std::cout << "query_size: " << std::to_string(query.size()) << std::endl;
                 std::cout << "n_threads: " << n_threads << std::endl;
                 std::cout << "k: " << k_baseline << std::endl;
                 std::cout << "exp_rep: " << exp_rep << std::endl;
 
-                // path where to save the results of the current experiment
-                std::filesystem::path exp_path = results_dir_path / "mc" / ("threads_" + std::to_string(n_threads)) / ("k_" + std::to_string(k)) / ("rep_" + std::to_string(exp_rep));
-
-                // create the directories if they do not exist yet
-                std::filesystem::create_directories(exp_path);
-
-                // path to the centralities computed by the baseline MC, which will be used as reference to compute errors
-                std::filesystem::path baseline_centralities_path =
+                // path where to save the results of the current experiment and where the baseline centralities are stored
+                std::filesystem::path exp_path;
+                std::filesystem::path baseline_centralities_path;
+                std::string query_string;
+                if (query.empty())
+                    query_string = "query_size_all";
+                else
+                    query_string = "query_size_" + std::to_string(query.size());
+                exp_path = results_dir_path / "mc" / query_string / ("threads_" + std::to_string(n_threads)) / ("k_" + std::to_string(k)) / ("rep_" + std::to_string(exp_rep));
+                baseline_centralities_path =
                     results_dir_path /
                     "mc_baseline" /
+                    query_string /
                     ("threads_" + std::to_string(n_threads)) /
                     ("k_" + std::to_string(k_baseline)) /
                     ("rep_" + std::to_string(exp_rep)) /
                     "centralities.tsv";
+
+                // create the directories if they do not exist yet
+                std::filesystem::create_directories(exp_path);
                 
                 // load the baseline centralities
                 std::vector<double> baseline_centralities = read_vector_tsv<double>(baseline_centralities_path);
 
                 // run the experiment
-                run_single_mc_experiment(uncertain_graph, exp_path, centrality, baseline_centralities, k, rng, exp_rep, n_threads);
+                run_single_mc_experiment(uncertain_graph, query, exp_path, centrality, baseline_centralities, k, rng, exp_rep, n_threads);
             }
         }
     }
 }
 
-void run_single_ew_experiment(const UncertainGraph &uncertain_graph, const std::filesystem::path &output_dir_path, const std::string &centrality, const std::vector<double> &centralities_baseline, int k, int l, int c, std::mt19937 &rng, int exp_rep, int n_threads) {
+void run_single_ew_experiment(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &output_dir_path, const std::string &centrality, const std::vector<double> &centralities_baseline, int k, int l, int c, std::mt19937 &rng, int exp_rep, int n_threads) {
 
     // map that will contain the data to store in the summary tsv
     std::map<std::string, SummaryType> summary_map;
     
     // update the summary map with experiment information
     summary_map["method"] = "ew";
+    if (query.empty())
+        summary_map["query_size"] = -1;
+    else
+        summary_map["query_size"] = (int) query.size();
     summary_map["exp_rep"] = exp_rep;
     summary_map["k"] = k;
     summary_map["l"] = l;
@@ -213,10 +274,19 @@ void run_single_ew_experiment(const UncertainGraph &uncertain_graph, const std::
     omp_set_num_threads(n_threads);
 
     // initialize the function that computes the ew-approximate centralities in a sampled possible world
-    auto ew_fn = [centrality, l, c](const PossibleWorld &world, std::mt19937 &rng) {
-        if (centrality == "lin")
-            return ew_lin_world(world, l, c, rng);
-        return ew_harmonic_world(world, l, rng);
+    auto ew_fn = [centrality, query, l, c](const PossibleWorld &world, std::mt19937 &rng) {
+        if (centrality == "lin") {
+            if (query.empty())
+                return ew_lin_world(world, l, c, rng);
+            else
+                return ew_lin_world_query(world, query, l, c, rng);
+        }
+        else {
+            if (query.empty())
+                return ew_harmonic_world(world, l, rng);
+            else
+                return ew_harmonic_world_query(world, query, l, rng);
+        }
     };
 
     // run the ew algorithm
@@ -232,14 +302,21 @@ void run_single_ew_experiment(const UncertainGraph &uncertain_graph, const std::
     std::cout << "Saving the results..." << std::endl;
     std::filesystem::path errors_path = output_dir_path / "errors.tsv";
     std::vector<std::string> col_names = {"node_id", "error"};
-    save_vector_tsv(errors_path, ew_errors, col_names);
+    if (query.empty()) {
+        std::vector<int> nodes(uncertain_graph.n);
+        for (int i = 0; i < uncertain_graph.n; ++i)
+            nodes[i] = i;
+        save_aligned_vectors_tsv(errors_path, nodes, ew_errors, col_names);
+    }
+    else
+        save_aligned_vectors_tsv(errors_path, query, ew_errors, col_names);
 
     // save the summary map in tsv format
     std::filesystem::path summary_map_path = output_dir_path / "summary.tsv";
     save_map_scalars_tsv(summary_map_path, summary_map);
 }
 
-void run_multiple_repeated_ew_experiments(const UncertainGraph &uncertain_graph, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> l_values, const std::vector<int> c_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
+void run_multiple_repeated_ew_experiments(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> l_values, const std::vector<int> c_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
 
     // run an experiment for each configuration of input parameters
     for (int n_threads : n_threads_values) {
@@ -253,6 +330,8 @@ void run_multiple_repeated_ew_experiments(const UncertainGraph &uncertain_graph,
 
                         // print some information about the current experiment
                         std::cout << "\nRunning EW with the following parameters:" << std::endl;
+                        if (!query.empty())
+                            std::cout << "query_size: " << std::to_string(query.size()) << std::endl;
                         std::cout << "n_threads: " << n_threads << std::endl;
                         std::cout << "k: " << k << std::endl;
                         std::cout << "l: " << l << std::endl;
@@ -260,33 +339,42 @@ void run_multiple_repeated_ew_experiments(const UncertainGraph &uncertain_graph,
                             std::cout << "c: " << c << std::endl;
                         std::cout << "exp_rep: " << exp_rep << std::endl;
                         std::cout << "The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:" << std::endl;
+                        if (!query.empty())
+                            std::cout << "query_size: " << std::to_string(query.size()) << std::endl;
                         std::cout << "n_threads: " << n_threads << std::endl;
                         std::cout << "k: " << k_baseline << std::endl;
                         std::cout << "exp_rep: " << exp_rep << std::endl;
 
-                        // path where to save the results of the current experiment
-                        std::filesystem::path exp_path = results_dir_path / "ew" / ("threads_" + std::to_string(n_threads)) / ("k_" + std::to_string(k)) / ("l_" + std::to_string(l));
-                        if (centrality == "lin")
-                            exp_path = exp_path / ("c_" + std::to_string(c));
-                        exp_path = exp_path / ("rep_" + std::to_string(exp_rep));
-
-                        // create the directories if they do not exist yet
-                        std::filesystem::create_directories(exp_path);
-
-                        // path to the centralities computed by the baseline MC, which will be used as reference to compute errors
-                        std::filesystem::path baseline_centralities_path =
+                        // path where to save the results of the current experiment and where the baseline centralities are stored
+                        std::filesystem::path exp_path;
+                        std::filesystem::path baseline_centralities_path;
+                        std::string query_string;
+                        if (query.empty())
+                            query_string = "query_size_all";
+                        else
+                            query_string = "query_size_" + std::to_string(query.size());
+                        exp_path = results_dir_path / "ew" / query_string / ("threads_" + std::to_string(n_threads)) / ("k_" + std::to_string(k)) / ("l_" + std::to_string(l));
+                        baseline_centralities_path =
                             results_dir_path /
                             "mc_baseline" /
+                            query_string /
                             ("threads_" + std::to_string(n_threads)) /
                             ("k_" + std::to_string(k_baseline)) /
                             ("rep_" + std::to_string(exp_rep)) /
                             "centralities.tsv";
+                        if (centrality == "lin")
+                            exp_path = exp_path / ("c_" + std::to_string(c));
+                        exp_path = exp_path / ("rep_" + std::to_string(exp_rep));
+
+
+                        // create the directories if they do not exist yet
+                        std::filesystem::create_directories(exp_path);
                         
                         // load the baseline centralities
                         std::vector<double> baseline_centralities = read_vector_tsv<double>(baseline_centralities_path);
 
                         // run the experiment
-                        run_single_ew_experiment(uncertain_graph, exp_path, centrality, baseline_centralities, k, l, c, rng, exp_rep, n_threads);
+                        run_single_ew_experiment(uncertain_graph, query, exp_path, centrality, baseline_centralities, k, l, c, rng, exp_rep, n_threads);
                     }
                 }
             }
@@ -294,13 +382,17 @@ void run_multiple_repeated_ew_experiments(const UncertainGraph &uncertain_graph,
     }
 }
 
-void run_single_pps_experiment(const UncertainGraph &uncertain_graph, const std::filesystem::path &output_dir_path, const std::string &centrality, const std::vector<double> &centralities_baseline, int k, int l, double delta, std::mt19937 &rng, int exp_rep, int n_threads) {
+void run_single_pps_experiment(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &output_dir_path, const std::string &centrality, const std::vector<double> &centralities_baseline, int k, int l, double delta, std::mt19937 &rng, int exp_rep, int n_threads) {
 
     // map that will contain the data to store in the summary tsv
     std::map<std::string, SummaryType> summary_map;
     
     // update the summary map with experiment information
     summary_map["method"] = "pps";
+    if (query.empty())
+        summary_map["query_size"] = -1;
+    else
+        summary_map["query_size"] = (int) query.size();
     summary_map["exp_rep"] = exp_rep;
     summary_map["k"] = k;
     summary_map["l"] = l;
@@ -311,10 +403,19 @@ void run_single_pps_experiment(const UncertainGraph &uncertain_graph, const std:
     omp_set_num_threads(n_threads);
 
     // initialize the function that computes the ew-approximate Lin's index in a sampled possible world
-    auto pps_fn = [centrality, k, l, delta](const PossibleWorld &world, std::mt19937 &rng) {
-        if (centrality == "lin")
-            return pps_lin_world(world, k, l, delta, rng);
-        return pps_harmonic_world(world, k, l, delta, rng);
+    auto pps_fn = [centrality, query, k, l, delta](const PossibleWorld &world, std::mt19937 &rng) {
+        if (centrality == "lin") {
+            if (query.empty())
+                return pps_lin_world(world, k, l, delta, rng);
+            else
+                return pps_lin_world_query(world, query, k, l, delta, rng);
+        }
+        else {
+            if (query.empty())
+                return pps_harmonic_world(world, k, l, delta, rng);
+            else
+                return pps_harmonic_world_query(world, query, k, l, delta, rng);
+        }
     };
 
     // run the pps algorithm
@@ -330,14 +431,21 @@ void run_single_pps_experiment(const UncertainGraph &uncertain_graph, const std:
     std::cout << "Saving the results..." << std::endl;
     std::filesystem::path errors_path = output_dir_path / "errors.tsv";
     std::vector<std::string> col_names = {"node_id", "error"};
-    save_vector_tsv(errors_path, pps_errors, col_names);
+    if (query.empty()) {
+        std::vector<int> nodes(uncertain_graph.n);
+        for (int i = 0; i < uncertain_graph.n; ++i)
+            nodes[i] = i;
+        save_aligned_vectors_tsv(errors_path, nodes, pps_errors, col_names);
+    }
+    else
+        save_aligned_vectors_tsv(errors_path, query, pps_errors, col_names);
 
     // save the summary map in tsv format
     std::filesystem::path summary_map_path = output_dir_path / "summary.tsv";
     save_map_scalars_tsv(summary_map_path, summary_map);
 }
 
-void run_multiple_repeated_pps_experiments(const UncertainGraph &uncertain_graph, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> l_values, const std::vector<double> delta_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
+void run_multiple_repeated_pps_experiments(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> l_values, const std::vector<double> delta_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
 
     // run an experiment for each configuration of input parameters
     for (int n_threads : n_threads_values) {
@@ -351,45 +459,56 @@ void run_multiple_repeated_pps_experiments(const UncertainGraph &uncertain_graph
 
                         // print some information about the current experiment
                         std::cout << "\nRunning PPS with the following parameters:" << std::endl;
+                        if (!query.empty())
+                            std::cout << "query_size: " << std::to_string(query.size()) << std::endl;
                         std::cout << "n_threads: " << n_threads << std::endl;
                         std::cout << "k: " << k << std::endl;
                         std::cout << "l: " << l << std::endl;
                         std::cout << "delta: " << delta << std::endl;
                         std::cout << "exp_rep: " << exp_rep << std::endl;
                         std::cout << "The errors of the estimated centralities are computed with respect to the MC baseline run with the following parameters:" << std::endl;
+                        if (!query.empty())
+                            std::cout << "query_size: " << std::to_string(query.size()) << std::endl;
                         std::cout << "n_threads: " << n_threads << std::endl;
                         std::cout << "k: " << k_baseline << std::endl;
                         std::cout << "exp_rep: " << exp_rep << std::endl;
 
-                        // path where to save the results of the current experiment
+                        // path where to save the results of the current experiment and where the baseline centralities are stored
                         std::ostringstream stream_delta;
                         stream_delta << std::fixed << std::setprecision(3) << delta;
-                        std::filesystem::path exp_path =
+                        std::filesystem::path exp_path;
+                        std::filesystem::path baseline_centralities_path;
+                        std::string query_string;
+                        if (query.empty())
+                            query_string = "query_size_all";
+                        else
+                            query_string = "query_size_" + std::to_string(query.size());
+                        exp_path =
                             results_dir_path /
-                                "pps" /
-                                ("threads_" + std::to_string(n_threads)) /
-                                ("k_" + std::to_string(k)) /
-                                ("l_" + std::to_string(l)) /
-                                ("delta_" + stream_delta.str()) /
-                                ("rep_" + std::to_string(exp_rep));
-
-                        // create the directories if they do not exist yet
-                        std::filesystem::create_directories(exp_path);
-
-                        // path to the centralities computed by the baseline MC, which will be used as reference to compute errors
-                        std::filesystem::path baseline_centralities_path =
+                            "pps" /
+                            query_string /
+                            ("threads_" + std::to_string(n_threads)) /
+                            ("k_" + std::to_string(k)) /
+                            ("l_" + std::to_string(l)) /
+                            ("delta_" + stream_delta.str()) /
+                            ("rep_" + std::to_string(exp_rep));
+                        baseline_centralities_path =
                             results_dir_path /
                             "mc_baseline" /
+                            query_string /
                             ("threads_" + std::to_string(n_threads)) /
                             ("k_" + std::to_string(k_baseline)) /
                             ("rep_" + std::to_string(exp_rep)) /
                             "centralities.tsv";
+
+                        // create the directories if they do not exist yet
+                        std::filesystem::create_directories(exp_path);
                         
                         // load the baseline centralities
                         std::vector<double> baseline_centralities = read_vector_tsv<double>(baseline_centralities_path);
 
                         // run the experiment
-                        run_single_pps_experiment(uncertain_graph, exp_path, centrality, baseline_centralities, k, l, delta, rng, exp_rep, n_threads);
+                        run_single_pps_experiment(uncertain_graph, query, exp_path, centrality, baseline_centralities, k, l, delta, rng, exp_rep, n_threads);
                     }
                 }
             }
@@ -432,6 +551,8 @@ std::map<std::string, ConfigType> parse_config_experiments(const std::filesystem
                 output_map[param_name] = std::stoi(param_value);
             else if (param_name == "delta_values")
                 output_map[param_name] = parse_string<double>(param_value, delimiter_values);
+            else if (param_name == "query_size")
+                output_map[param_name] = std::stoi(param_value);
             else
                 output_map[param_name] = parse_string<int>(param_value, delimiter_values);
         }
@@ -474,6 +595,7 @@ int main(int argc, char* argv[]) {
     int k_baseline_comparisons = std::get<int>(config["k_baseline_comparisons"]);
     int exp_reps = std::get<int>(config["exp_reps"]);
     int random_seed = std::get<int>(config["random_seed"]);
+    int query_size = std::get<int>(config["query_size"]);
 
     // define the random number generator for the initial random operations
     std::mt19937 rng(random_seed);
@@ -500,12 +622,24 @@ int main(int argc, char* argv[]) {
     std::cout << "Estimated upper bound for the diameter: " << diameter_ub << std::endl;
     std::cout << "Time required to estimate the upper bound: " << elapsed_time_diameter.count() << "s" << std::endl;
 
+    // sample the query nodes, if required
+    std::vector<int> query;
+    if (query_size != -1) {
+        std::vector<int> nodes(uncertain_graph.n);
+        for (int i = 0; i < uncertain_graph.n; ++i)
+            nodes[i] = i;
+        query = uniform_sample_without_replacement(nodes, query_size, rng);
+        std::cout << "Number of query nodes: " << std::to_string(query_size) << std::endl;
+    }
+    else
+        std::cout << "The centralities of all the nodes in the input uncertain graph will be computed. " << std::endl;
+
     // run the experiments
     std::cout << "Running experiments on the " << centrality << " centrality." << std::endl;
-    run_multiple_repeated_exact_experiments(uncertain_graph, output_path, centrality, k_baseline_values, n_threads_values, exp_reps, random_seed);
-    run_multiple_repeated_mc_experiments(uncertain_graph, output_path, centrality, k_baseline_comparisons, k_values, n_threads_values, exp_reps, random_seed);
-    run_multiple_repeated_ew_experiments(uncertain_graph, output_path, centrality, k_baseline_comparisons, k_values, l_values, c_values, n_threads_values, exp_reps, random_seed);
-    run_multiple_repeated_pps_experiments(uncertain_graph, output_path, centrality, k_baseline_comparisons, k_values, l_values, delta_values, n_threads_values, exp_reps, random_seed);
+    run_multiple_repeated_exact_experiments(uncertain_graph, query, output_path, centrality, k_baseline_values, n_threads_values, exp_reps, random_seed);
+    run_multiple_repeated_mc_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, n_threads_values, exp_reps, random_seed);
+    run_multiple_repeated_ew_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, l_values, c_values, n_threads_values, exp_reps, random_seed);
+    run_multiple_repeated_pps_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, l_values, delta_values, n_threads_values, exp_reps, random_seed);
 
     return 0;
 }
