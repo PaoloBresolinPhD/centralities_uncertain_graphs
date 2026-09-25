@@ -49,3 +49,39 @@ std::map<int, double> harmonic_pps_sample(const PossibleWorld &world, const std:
  * @return vector of double where the component with index v stores the harmonic centrality of v in the input possible world.
  */
 std::vector<double> pps_harmonic_world(const PossibleWorld &world, int k, int l, double delta, std::mt19937 &rng);
+
+/**
+ * Computes the exact harmonic centrality of the input nodes in the input possible world.
+ * 
+ * @param world possible world.
+ * @param query query set of nodes.
+ * 
+ * @return vector of double where the value at position i stores the harmonic centrality in the input possible world of the node at position i in the input query.
+ */
+std::vector<double> exact_harmonic_world_query(const PossibleWorld &world, const std::vector<int> &query);
+
+/**
+ * Approximates the harmonic centrality of the input nodes in the input possible world using the Eppstein-Wang-based algorithm.
+ * 
+ * @param world possible world.
+ * @param query query set of nodes.
+ * @param l int representing the number of nodes to sample in the possible world.
+ * @param rng random number generator for reproducibility.
+ * 
+ * @return vector of double where the value at position i stores the harmonic centrality in the input possible world of the node at position i in the input query.
+ */
+std::vector<double> ew_harmonic_world_query(const PossibleWorld &world, const std::vector<int> &query, int l, std::mt19937 &rng);
+
+/**
+ * Approximates the harmonic centrality of the input nodes in the input possible world using the PPS-based algorithm.
+ * 
+ * @param world possible world.
+ * @param query query set of nodes.
+ * @param k int representing the number of possible world to sample. It is required to compute p_s.
+ * @param l int suggesting the number of nodes to sample in the possible world. The number of sampled points will be O(l).
+ * @param delta double representing the error confidence. It is required to compute p_s.
+ * @param rng random number generator for reproducibility.
+ * 
+ * @return vector of double where the value at position i stores the harmonic centrality in the input possible world of the node at position i in the input query.
+ */
+std::vector<double> pps_harmonic_world_query(const PossibleWorld &world, const std::vector<int> &query, int k, int l, double delta, std::mt19937 &rng);

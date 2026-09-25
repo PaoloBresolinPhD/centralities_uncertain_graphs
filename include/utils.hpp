@@ -92,16 +92,15 @@ void save_map_vectors_tsv(const std::filesystem::path &output_path, const std::m
 void save_map_scalars_tsv(const std::filesystem::path &output_path, const std::map<std::string, SummaryType> &map);
 
 /**
- * Saves a vector in tsv format.
- * The indices of the vector are printed as first column.
- * The values of the vector are printed as second column.
+ * Saves two aligned vectors as two columns in tsv format.
  * 
  * @param output_path path to the output file where to save the vector.
- * @param vector vector to save.
- * @param column_names names of the columns to print. The first string is the name of the column with the vector's ids. The second string is the name of the column with the vector values.
+ * @param col_1 vector to save as the first column.
+ * @param col_2 vector to save as the second column.
+ * @param column_names names of the columns to print.
  */
-template <typename T>
-void save_vector_tsv(const std::filesystem::path &output_path, const std::vector<T> &vector, std::vector<std::string> &column_names) {
+template <typename T_1, typename T_2>
+void save_aligned_vectors_tsv(const std::filesystem::path &output_path, const std::vector<T_1> &col_1, const std::vector<T_2> &col_2, std::vector<std::string> &column_names) {
 
     // create the output directory if it does not exist
     if (output_path.has_parent_path())
@@ -116,10 +115,10 @@ void save_vector_tsv(const std::filesystem::path &output_path, const std::vector
     // print the header
     file << column_names[0] << "\t" << column_names[1] << "\n";
 
-    // print the indices and values in the vector
-    for (int i = 0; i < (int) vector.size() - 1; ++i)
-        file << i << "\t" << vector[i] << "\n";
-    file << vector.size() - 1 << "\t" << vector[vector.size() - 1];
+    // print the aligned vectors
+    for (int i = 0; i < (int) col_1.size() - 1; ++i)
+        file << col_1[i] << "\t" << col_2[i] << "\n";
+    file << col_1[col_1.size() - 1] << "\t" << col_2[col_2.size() - 1];
 }
 
 /**
@@ -198,6 +197,17 @@ std::vector<T> parse_string(const std::string &input_str, char delimiter) {
 std::vector<int> uniform_sample_with_replacement(const std::vector<int> &vec, int l, std::mt19937 &rng);
 
 /**
+ * Samples uniformly at random without replacement l integers from the input vecor.
+ * 
+ * @param vec vector of int with the values from which sampling.
+ * @param l number of values to sample.
+ * @param rng random number generator for reproducibility.
+ * 
+ * @return vector of int with the sampled values.
+ */
+std::vector<int> uniform_sample_without_replacement(const std::vector<int> &vec, int l, std::mt19937 &rng);
+
+/**
  * Extracts a Poisson sample from the input vector, according to the input probabilities.
  * 
  * @param vec vector of integers with the elements to sample.
@@ -208,4 +218,3 @@ std::vector<int> uniform_sample_with_replacement(const std::vector<int> &vec, in
  * @return vector of integers with the sampled nodes.
  */
 std::vector<int> poisson_sample(const std::vector<int> &vec, const std::vector<double> &probs, std::mt19937 &rng);
-
