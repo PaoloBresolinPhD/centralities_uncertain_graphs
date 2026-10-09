@@ -52,7 +52,15 @@ def plot_times_threads(input_df, measure, query_size, k, k_baseline, l, c, delta
 
     sns.set_theme("paper", font_scale=1.0)
 
-    sns.barplot(data=plot_df, x="n_threads", y="time", hue="method", palette=sns.color_palette("colorblind"))
+    colors = sns.color_palette("colorblind")
+    palette = {
+        "mc_baseline": colors[3],
+        "mc": colors[0],
+        "ew": colors[1],
+        "pps": colors[2]
+    }
+
+    sns.barplot(data=plot_df, x="n_threads", y="time", hue="method", palette=palette)
 
     # plt.title("Running Time Over Threads")
     plt.xlabel("Number of Threads")
@@ -82,7 +90,14 @@ def plot_times_k(input_df, measure, query_size, n_threads, l, c, delta, output_p
 
     sns.set_theme("paper", font_scale=1.0)
 
-    sns.barplot(data=plot_df, x="k", y="time", hue="method", palette=sns.color_palette("colorblind"))
+    colors = sns.color_palette("colorblind")
+    palette = {
+        "mc": colors[0],
+        "ew": colors[1],
+        "pps": colors[2]
+    }
+
+    sns.barplot(data=plot_df, x="k", y="time", hue="method", palette=palette)
 
     # plt.title("Running Time Over k")
     plt.xlabel("Number of Sampled Possible Worlds (k)")
@@ -112,7 +127,13 @@ def plot_times_l(input_df, measure, query_size, k, n_threads, c, delta, output_p
 
     sns.set_theme("paper", font_scale=1.0)
 
-    sns.barplot(data=plot_df, x="l", y="time", hue="method", palette=sns.color_palette("colorblind"))
+    colors = sns.color_palette("colorblind")
+    palette = {
+        "ew": colors[1],
+        "pps": colors[2]
+    }
+
+    sns.barplot(data=plot_df, x="l", y="time", hue="method", palette=palette)
 
     # plt.title("Running Time Over l")
     plt.xlabel("Number of Sampled Nodes (l)")
@@ -142,10 +163,17 @@ def plot_errors_k(input_df, measure, query_size, n_threads, l, c, delta, output_
 
     sns.set_theme("paper", font_scale=1.0)
 
-    sns.boxplot(data=plot_df, x="method", y="avg_error", hue="k", palette=sns.color_palette("colorblind"))
+    colors = sns.color_palette("colorblind")
+    palette = {
+        "mc": colors[0],
+        "ew": colors[1],
+        "pps": colors[2]
+    }
+
+    sns.boxplot(data=plot_df, x="k", y="avg_error", hue="method", palette=palette)
 
     # plt.title("Error Over k")
-    plt.xlabel("Method")
+    plt.xlabel("k")
     plt.ylabel("Error (MAE)")
 
     apply_large_fonts()
@@ -171,10 +199,16 @@ def plot_errors_l(input_df, measure, query_size, n_threads, k, c, delta, output_
 
     sns.set_theme("paper", font_scale=1.0)
 
-    sns.boxplot(data=plot_df, x="method", y="avg_error", hue="l", palette=sns.color_palette("colorblind"))
+    colors = sns.color_palette("colorblind")
+    palette = {
+        "ew": colors[1],
+        "pps": colors[2]
+    }
+
+    sns.boxplot(data=plot_df, x="l", y="avg_error", hue="method", palette=palette)
 
     # plt.title("Error Over l")
-    plt.xlabel("Method")
+    plt.xlabel("l")
     plt.ylabel("Error (MAE)")
 
     apply_large_fonts()
@@ -199,7 +233,7 @@ if __name__ == "__main__":
         summaries_df["query_size"] = summaries_df["query_size"].fillna(-1)
     
     # plot how the running time changes as the number of threads changes, for fixed other values
-    query_size = -1
+    query_size = 10000
     k = 100
     k_baseline = 500
     l = 100
