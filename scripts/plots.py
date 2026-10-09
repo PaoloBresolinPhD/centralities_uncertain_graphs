@@ -17,6 +17,23 @@ def parse_args():
 
     return parser.parse_args()
 
+def apply_large_fonts():
+    """
+    Helper function to apply large font sizes consistently across all plots.
+    """
+
+    # set the font sizes of title, axes labels and axes values
+    plt.title(plt.gca().get_title(), fontsize=18)
+    plt.xlabel(plt.gca().get_xlabel(), fontsize=18)
+    plt.ylabel(plt.gca().get_ylabel(), fontsize=18)
+    plt.tick_params(axis="both", which="both", labelsize=16)
+    
+    # set the font sizes for the legend
+    legend = plt.gca().get_legend()
+    if legend:
+        plt.setp(legend.get_texts(), fontsize=16)
+        plt.setp(legend.get_title(), fontsize=18)
+
 def plot_times_threads(input_df, measure, query_size, k, k_baseline, l, c, delta, output_path):
 
     # extract only the required data
@@ -33,18 +50,20 @@ def plot_times_threads(input_df, measure, query_size, k, k_baseline, l, c, delta
     # plot the dataframe
     plt.close()
 
-    sns.set_theme("paper")
+    sns.set_theme("paper", font_scale=1.0)
 
     sns.barplot(data=plot_df, x="n_threads", y="time", hue="method", palette=sns.color_palette("colorblind"))
 
-    plt.title("Running Time Over Threads")
+    # plt.title("Running Time Over Threads")
     plt.xlabel("Number of Threads")
     plt.ylabel("Time (s)")
     plt.yscale("log")
+
+    apply_large_fonts()
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    plt.savefig(output_path)
+    plt.savefig(output_path, bbox_inches="tight")
 
 def plot_times_k(input_df, measure, query_size, n_threads, l, c, delta, output_path):
 
@@ -61,18 +80,20 @@ def plot_times_k(input_df, measure, query_size, n_threads, l, c, delta, output_p
     # plot the dataframe
     plt.close()
 
-    sns.set_theme("paper")
+    sns.set_theme("paper", font_scale=1.0)
 
     sns.barplot(data=plot_df, x="k", y="time", hue="method", palette=sns.color_palette("colorblind"))
 
-    plt.title("Running Time Over k")
+    # plt.title("Running Time Over k")
     plt.xlabel("Number of Sampled Possible Worlds (k)")
     plt.ylabel("Time (s)")
     plt.yscale("log")
+
+    apply_large_fonts()
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    plt.savefig(output_path)
+    plt.savefig(output_path, bbox_inches="tight")
 
 def plot_times_l(input_df, measure, query_size, k, n_threads, c, delta, output_path):
 
@@ -89,18 +110,20 @@ def plot_times_l(input_df, measure, query_size, k, n_threads, c, delta, output_p
     # plot the dataframe
     plt.close()
 
-    sns.set_theme("paper")
+    sns.set_theme("paper", font_scale=1.0)
 
     sns.barplot(data=plot_df, x="l", y="time", hue="method", palette=sns.color_palette("colorblind"))
 
-    plt.title("Running Time Over l")
+    # plt.title("Running Time Over l")
     plt.xlabel("Number of Sampled Nodes (l)")
     plt.ylabel("Time (s)")
     plt.yscale("log")
+
+    apply_large_fonts()
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    plt.savefig(output_path)
+    plt.savefig(output_path, bbox_inches="tight")
 
 def plot_errors_k(input_df, measure, query_size, n_threads, l, c, delta, output_path):
 
@@ -117,17 +140,19 @@ def plot_errors_k(input_df, measure, query_size, n_threads, l, c, delta, output_
     # plot the dataframe
     plt.close()
 
-    sns.set_theme("paper")
+    sns.set_theme("paper", font_scale=1.0)
 
     sns.boxplot(data=plot_df, x="method", y="avg_error", hue="k", palette=sns.color_palette("colorblind"))
 
-    plt.title("Error Over k")
+    # plt.title("Error Over k")
     plt.xlabel("Method")
     plt.ylabel("Error (MAE)")
+
+    apply_large_fonts()
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    plt.savefig(output_path)
+    plt.savefig(output_path, bbox_inches="tight")
 
 def plot_errors_l(input_df, measure, query_size, n_threads, k, c, delta, output_path):
 
@@ -144,17 +169,19 @@ def plot_errors_l(input_df, measure, query_size, n_threads, k, c, delta, output_
     # plot the dataframe
     plt.close()
 
-    sns.set_theme("paper")
+    sns.set_theme("paper", font_scale=1.0)
 
     sns.boxplot(data=plot_df, x="method", y="avg_error", hue="l", palette=sns.color_palette("colorblind"))
 
-    plt.title("Error Over l")
+    # plt.title("Error Over l")
     plt.xlabel("Method")
     plt.ylabel("Error (MAE)")
+
+    apply_large_fonts()
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    plt.savefig(output_path)
+    plt.savefig(output_path, bbox_inches="tight")
 
 if __name__ == "__main__":
 
@@ -164,9 +191,15 @@ if __name__ == "__main__":
     # load the summary results across all experiments into a single dataframe
     input_path = Path(args.input_dir)
     summaries_df = pd.concat([pd.read_csv(f, sep="\t") for f in input_path.rglob("summary.tsv")], ignore_index=True, join="outer")
+
+    # create the query_size column if it does not exist, or fill NaN values with -1 if it exists
+    if "query_size" not in summaries_df.columns:
+        summaries_df["query_size"] = -1
+    else:
+        summaries_df["query_size"] = summaries_df["query_size"].fillna(-1)
     
     # plot how the running time changes as the number of threads changes, for fixed other values
-    query_size = 1000
+    query_size = -1
     k = 100
     k_baseline = 500
     l = 100
