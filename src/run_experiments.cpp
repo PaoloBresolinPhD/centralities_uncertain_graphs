@@ -13,27 +13,33 @@
 
 using ConfigType = std::variant<std::string, std::vector<int>, std::vector<double>, int>;
 
-std::tuple<std::vector<double>, double, double, double, double> run_method(const UncertainGraph &uncertain_graph, const std::function<std::vector<double>(const PossibleWorld&, std::mt19937&)> &in_world_centrality_fn, int k, const std::vector<double> &baseline_centralities, std::mt19937 &rng) {
+std::tuple<std::vector<double>, double, double, double, double> run_method(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::function<std::vector<double>(const PossibleWorld&, std::mt19937&)> &in_world_centrality_fn, int k, const std::vector<double> &baseline_centralities, std::mt19937 &rng) {
 
     // run the input method
     auto start_time = std::chrono::high_resolution_clock::now();
-    std::vector<double> estimated_centralities = mc_centralities_uncertain_graph(uncertain_graph, (int) baseline_centralities.size(), k, in_world_centrality_fn, rng);
+    std::vector<double> estimated_centralities = mc_centralities_uncertain_graph(uncertain_graph, uncertain_graph.n, k, in_world_centrality_fn, rng);
     auto end_time = std::chrono::high_resolution_clock::now();
 
     // compute and append the time required to compute the centralities in seconds
     std::chrono::duration<double> elapsed_time = end_time - start_time;
 
     // compute the centralities errors and add them to the table
-    std::vector<double> centralities_errors(estimated_centralities.size());
-    for (int i = 0; i < (int) estimated_centralities.size(); ++i)
-        centralities_errors[i] = std::abs(baseline_centralities[i] - estimated_centralities[i]);
+    std::vector<double> centralities_errors(baseline_centralities.size());
+    if (query.empty()) {
+        for (int i = 0; i < (int) estimated_centralities.size(); ++i)
+            centralities_errors[i] = std::abs(baseline_centralities[i] - estimated_centralities[i]);
+    }
+    else {
+        for (int i = 0; i < (int) query.size(); ++i)
+            centralities_errors[i] = std::abs(baseline_centralities[i] - estimated_centralities[query[i]]);
+    }
 
     // compute the minimum, maximum and average error
     auto min_max_pair = std::minmax_element(centralities_errors.begin(), centralities_errors.end());
     double min_error = *(min_max_pair.first);
     double max_error = *(min_max_pair.second);
     double sum_errors = std::accumulate(centralities_errors.begin(), centralities_errors.end(), 0.0);
-    double avg_error = sum_errors / centralities_errors.size();
+    double avg_error = sum_errors / (double) centralities_errors.size();
 
     // return a tuple with the errors, the elapsed time, the minimum error, the maximum error and the averge error
     return std::tuple<std::vector<double>, double, double, double, double>(centralities_errors, elapsed_time.count(), min_error, max_error, avg_error);
@@ -80,7 +86,10 @@ void run_single_exact_experiment(const UncertainGraph &uncertain_graph, const st
 
     // compute and store the time required to compute the centralities
     std::chrono::duration<double> exact_elapsed_time = end_time_exact - start_time_exact;
-    summary_map["time"] = exact_elapsed_time.count();
+    if (query.empty())
+        summary_map["time"] = exact_elapsed_time.count();
+    else
+        summary_map["time"] = exact_elapsed_time.count() / (double) query.size() * uncertain_graph.n;
 
     // save the computed centralities in the output file in tsv format
     std::cout << "Saving the results..." << std::endl;
@@ -170,14 +179,31 @@ void run_single_mc_experiment(const UncertainGraph &uncertain_graph, const std::
         }
     };
 
-    // run the mc algorithm
-    auto [mc_errors, mc_elapsed_time, mc_min, mc_max, mc_avg] = run_method(uncertain_graph, exact_fn, k, centralities_baseline, rng);
+    // run the mc method
+    auto start_time = std::chrono::high_resolution_clock::now();
+    std::vector<double> estimated_centralities = mc_centralities_uncertain_graph(uncertain_graph, (int) centralities_baseline.size(), k, exact_fn, rng);
+    auto end_time = std::chrono::high_resolution_clock::now();
 
-    // update the summary map
-    summary_map["time"] = mc_elapsed_time;
-    summary_map["min_error"] = mc_min;
-    summary_map["max_error"] = mc_max;
-    summary_map["avg_error"] = mc_avg;
+    // compute and append the time required to compute the centralities in seconds
+    std::chrono::duration<double> elapsed_time = end_time - start_time;
+
+    // compute the centralities errors and add them to the table
+    std::vector<double> centralities_errors(centralities_baseline.size());
+    for (int i = 0; i < (int) estimated_centralities.size(); ++i)
+        centralities_errors[i] = std::abs(centralities_baseline[i] - estimated_centralities[i]);
+
+    // update the summary map with the time
+    if (query.empty())
+        summary_map["time"] = elapsed_time.count();
+    else
+        summary_map["time"] = elapsed_time.count() / (double) query.size() * uncertain_graph.n;
+    
+    // compute the minimum, maximum and average error and update the summary map
+    auto min_max_pair = std::minmax_element(centralities_errors.begin(), centralities_errors.end());
+    double sum_errors = std::accumulate(centralities_errors.begin(), centralities_errors.end(), 0.0);
+    summary_map["min_error"] = *(min_max_pair.first);
+    summary_map["max_error"] = *(min_max_pair.second);
+    summary_map["avg_error"] = sum_errors / (double) centralities_errors.size();
 
     // save the computed errors in the output file in tsv format
     std::cout << "Saving the results..." << std::endl;
@@ -187,10 +213,10 @@ void run_single_mc_experiment(const UncertainGraph &uncertain_graph, const std::
         std::vector<int> nodes(uncertain_graph.n);
         for (int i = 0; i < uncertain_graph.n; ++i)
             nodes[i] = i;
-        save_aligned_vectors_tsv(errors_path, nodes, mc_errors, col_names);
+        save_aligned_vectors_tsv(errors_path, nodes, centralities_errors, col_names);
     }
     else
-        save_aligned_vectors_tsv(errors_path, query, mc_errors, col_names);
+        save_aligned_vectors_tsv(errors_path, query, centralities_errors, col_names);
 
     // save the summary map in tsv format
     std::filesystem::path summary_map_path = output_dir_path / "summary.tsv";
@@ -274,23 +300,15 @@ void run_single_ew_experiment(const UncertainGraph &uncertain_graph, const std::
     omp_set_num_threads(n_threads);
 
     // initialize the function that computes the ew-approximate centralities in a sampled possible world
-    auto ew_fn = [centrality, query, l, c](const PossibleWorld &world, std::mt19937 &rng) {
-        if (centrality == "lin") {
-            if (query.empty())
-                return ew_lin_world(world, l, c, rng);
-            else
-                return ew_lin_world_query(world, query, l, c, rng);
-        }
-        else {
-            if (query.empty())
-                return ew_harmonic_world(world, l, rng);
-            else
-                return ew_harmonic_world_query(world, query, l, rng);
-        }
+    auto ew_fn = [centrality, l, c](const PossibleWorld &world, std::mt19937 &rng) {
+        if (centrality == "lin")
+            return ew_lin_world(world, l, c, rng);
+        else
+            return ew_harmonic_world(world, l, rng);
     };
 
     // run the ew algorithm
-    auto [ew_errors, ew_elapsed_time, ew_min, ew_max, ew_avg] = run_method(uncertain_graph, ew_fn, k, centralities_baseline, rng);
+    auto [ew_errors, ew_elapsed_time, ew_min, ew_max, ew_avg] = run_method(uncertain_graph, query, ew_fn, k, centralities_baseline, rng);
 
     // update the summary map
     summary_map["time"] = ew_elapsed_time;
@@ -316,7 +334,7 @@ void run_single_ew_experiment(const UncertainGraph &uncertain_graph, const std::
     save_map_scalars_tsv(summary_map_path, summary_map);
 }
 
-void run_multiple_repeated_ew_experiments(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> l_values, const std::vector<int> c_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
+void run_multiple_repeated_ew_experiments(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> &l_values, const std::vector<int> c_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
 
     // run an experiment for each configuration of input parameters
     for (int n_threads : n_threads_values) {
@@ -403,23 +421,15 @@ void run_single_pps_experiment(const UncertainGraph &uncertain_graph, const std:
     omp_set_num_threads(n_threads);
 
     // initialize the function that computes the ew-approximate Lin's index in a sampled possible world
-    auto pps_fn = [centrality, query, k, l, delta](const PossibleWorld &world, std::mt19937 &rng) {
-        if (centrality == "lin") {
-            if (query.empty())
-                return pps_lin_world(world, k, l, delta, rng);
-            else
-                return pps_lin_world_query(world, query, k, l, delta, rng);
-        }
-        else {
-            if (query.empty())
-                return pps_harmonic_world(world, k, l, delta, rng);
-            else
-                return pps_harmonic_world_query(world, query, k, l, delta, rng);
-        }
+    auto pps_fn = [centrality, k, l, delta](const PossibleWorld &world, std::mt19937 &rng) {
+        if (centrality == "lin")
+            return pps_lin_world(world, k, l, delta, rng);
+        else
+            return pps_harmonic_world(world, k, l, delta, rng);
     };
 
     // run the pps algorithm
-    auto [pps_errors, pps_elapsed_time, pps_min, pps_max, pps_avg] = run_method(uncertain_graph, pps_fn, k, centralities_baseline, rng);
+    auto [pps_errors, pps_elapsed_time, pps_min, pps_max, pps_avg] = run_method(uncertain_graph, query, pps_fn, k, centralities_baseline, rng);
 
     // update the summary map
     summary_map["time"] = pps_elapsed_time;
@@ -445,7 +455,7 @@ void run_single_pps_experiment(const UncertainGraph &uncertain_graph, const std:
     save_map_scalars_tsv(summary_map_path, summary_map);
 }
 
-void run_multiple_repeated_pps_experiments(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> l_values, const std::vector<double> delta_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
+void run_multiple_repeated_pps_experiments(const UncertainGraph &uncertain_graph, const std::vector<int> &query, const std::filesystem::path &results_dir_path, const std::string &centrality, int k_baseline, const std::vector<int> &k_values, const std::vector<int> &l_values, const std::vector<double> delta_values, const std::vector<int> &n_threads_values, int n_reps, int random_seed) {
 
     // run an experiment for each configuration of input parameters
     for (int n_threads : n_threads_values) {
@@ -636,8 +646,8 @@ int main(int argc, char* argv[]) {
 
     // run the experiments
     std::cout << "Running experiments on the " << centrality << " centrality." << std::endl;
-    run_multiple_repeated_exact_experiments(uncertain_graph, query, output_path, centrality, k_baseline_values, n_threads_values, exp_reps, random_seed);
-    run_multiple_repeated_mc_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, n_threads_values, exp_reps, random_seed);
+    // run_multiple_repeated_exact_experiments(uncertain_graph, query, output_path, centrality, k_baseline_values, n_threads_values, exp_reps, random_seed);
+    // run_multiple_repeated_mc_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, n_threads_values, exp_reps, random_seed);
     run_multiple_repeated_ew_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, l_values, c_values, n_threads_values, exp_reps, random_seed);
     run_multiple_repeated_pps_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, l_values, delta_values, n_threads_values, exp_reps, random_seed);
 
