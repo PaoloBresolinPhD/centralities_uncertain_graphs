@@ -646,8 +646,8 @@ int main(int argc, char* argv[]) {
 
     // run the experiments
     std::cout << "Running experiments on the " << centrality << " centrality." << std::endl;
-    // run_multiple_repeated_exact_experiments(uncertain_graph, query, output_path, centrality, k_baseline_values, n_threads_values, exp_reps, random_seed);
-    // run_multiple_repeated_mc_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, n_threads_values, exp_reps, random_seed);
+    run_multiple_repeated_exact_experiments(uncertain_graph, query, output_path, centrality, k_baseline_values, n_threads_values, exp_reps, random_seed);
+    run_multiple_repeated_mc_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, n_threads_values, exp_reps, random_seed);
     run_multiple_repeated_ew_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, l_values, c_values, n_threads_values, exp_reps, random_seed);
     run_multiple_repeated_pps_experiments(uncertain_graph, query, output_path, centrality, k_baseline_comparisons, k_values, l_values, delta_values, n_threads_values, exp_reps, random_seed);
 
