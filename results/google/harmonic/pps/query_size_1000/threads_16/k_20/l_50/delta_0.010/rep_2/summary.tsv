@@ -1,0 +1,2 @@
+avg_error	delta	exp_rep	k	l	max_error	method	min_error	n_threads	query_size	time
+0.005211742892	0.01	2	20	50	0.03476804473	pps	1.027735146e-07	16	1000	60.88974357
