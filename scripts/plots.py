@@ -2,7 +2,9 @@ import os
 from pathlib import Path
 import argparse
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import seaborn as sns
 
 def parse_args():
@@ -141,6 +143,19 @@ def plot_times_l(input_df, measure, query_size, k, n_threads, c, delta, output_p
     plt.yscale("log")
 
     apply_large_fonts()
+
+    # keep only powers of 10 on the y axis, inserting at least 3 values
+    ax = plt.gca()
+    ymin, ymax = plot_df["time"].min(), plot_df["time"].max()
+    lo = 10 ** np.floor(np.log10(ymin))
+    hi = 10 ** np.ceil(np.log10(ymax))
+    if hi / lo < 100:
+        lo /= 10
+        hi *= 10 if hi / lo < 100 else 1
+    ax.set_ylim(lo, hi)
+    ax.yaxis.set_major_locator(ticker.LogLocator(base=10, numticks=20))
+    ax.yaxis.set_major_formatter(ticker.LogFormatterMathtext(base=10))
+    ax.yaxis.set_minor_formatter(ticker.NullFormatter())
     
     # save the plot
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -233,7 +248,7 @@ if __name__ == "__main__":
         summaries_df["query_size"] = summaries_df["query_size"].fillna(-1)
     
     # plot how the running time changes as the number of threads changes, for fixed other values
-    query_size = 10000
+    query_size = 1000
     k = 100
     k_baseline = 500
     l = 100
