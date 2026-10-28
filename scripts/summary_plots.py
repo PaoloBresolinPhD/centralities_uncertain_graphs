@@ -85,7 +85,7 @@ def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_o
 
         # set title, axes labels and ticks
         ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
-        ax.set_xlabel(bold(f"({chr(ord('a') + i)})"), fontsize=18, fontweight="bold")
+        ax.set_xlabel(f"({chr(ord('a') + i)})", fontsize=18)
         ax.set_ylabel("")
         ax.tick_params(axis="both", which="both", labelsize=16)
  
@@ -192,7 +192,7 @@ def times_l_plot(plot_df, centrality, palette, n_threads, k, c, delta, methods_o
 
         # set title, axes labels and ticks
         ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
-        ax.set_xlabel(bold(f"({chr(ord('a') + i)})"), fontsize=18, fontweight="bold")
+        ax.set_xlabel(f"({chr(ord('a') + i)})", fontsize=18)
         ax.set_ylabel("")
         ax.tick_params(axis="both", which="both", labelsize=16)
  
@@ -296,7 +296,7 @@ def errors_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_
 
         # set title, axes labels and ticks
         ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
-        ax.set_xlabel(bold(f"({chr(ord('a') + i)})"), fontsize=18, fontweight="bold")
+        ax.set_xlabel(f"({chr(ord('a') + i)})", fontsize=18)
         ax.set_ylabel("")
         ax.tick_params(axis="both", which="both", labelsize=16)
  
@@ -395,7 +395,7 @@ def errors_l_plot(plot_df, centrality, palette, n_threads, k, c, delta, methods_
 
         # set title, axes labels and ticks
         ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
-        ax.set_xlabel(bold(f"({chr(ord('a') + i)})"), fontsize=18, fontweight="bold")
+        ax.set_xlabel(f"({chr(ord('a') + i)})", fontsize=18)
         ax.set_ylabel("")
         ax.tick_params(axis="both", which="both", labelsize=16)
  
@@ -439,7 +439,8 @@ def time_error_plot(plot_df, centrality, palette, markers, methods_order, datase
     sns.set_style("whitegrid")
     plt.rcParams.update({"text.usetex": USE_LATEX, "font.family": "serif" if USE_LATEX else "sans-serif"})
 
-    # create the figure
+    # create the figure: wide, since it spans both columns of the paper (figure*), so that once
+    # scaled down to \textwidth the fonts are about half of the sizes set below (16pt -> ~8pt)
     fig, ax = plt.subplots(figsize=(14, 5), layout="constrained")
 
     # iterate through the rows of the input df
@@ -526,6 +527,108 @@ def time_error_plot(plot_df, centrality, palette, markers, methods_order, datase
  
     # save the plot
     plt.savefig(output_path, bbox_inches="tight", bbox_extra_artists=[method_legend, dataset_legend])
+
+def time_error_plots(lin_plot_df, harmonic_plot_df, palette, markers, methods_order_lin, methods_order_harmonic, datasets_order, output_path):
+    """
+    Creates a single figure with a subplot per centrality showing error and time across datasets.
+    """
+
+    # close previous plots
+    plt.close()
+
+    # set theme and style
+    sns.set_theme("paper", font_scale=1.0)
+    sns.set_style("whitegrid")
+    plt.rcParams.update({"text.usetex": USE_LATEX, "font.family": "serif" if USE_LATEX else "sans-serif"})
+
+    # create the figure
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5), layout="constrained")
+
+    # data, title and minimum value of the x axis for each subplot
+    subplots = [
+        (lin_plot_df, "Lin's Index", 1e-1),
+        (harmonic_plot_df, "Harmonic Centrality", 1e-2),
+    ]
+
+    # iterate over the subplots
+    for i, (ax, (plot_df, title, x_min)) in enumerate(zip(axes, subplots)):
+
+        # iterate through the rows of the input df
+        for _, row in plot_df.iterrows():
+
+            # extract mean and std of times and errors
+            t, t_std = row["Time"], row["Time_std"]
+            e, e_std = row["MAE"], row["MAE_std"]
+
+            # clip the lower bars: time must stay > 0 on a log axis, MAE can't be < 0
+            x_lower = min(t_std, t * 0.999)
+            y_lower = min(e_std, e)
+
+            # points: semi-transparent fill
+            ax.plot(
+                t, e,
+                marker=markers[row["Dataset"]], linestyle="none",
+                markerfacecolor=to_rgba(palette[row["Method"]], 0.5),
+                markeredgecolor=palette[row["Method"]],
+                markersize=12 if markers[row["Dataset"]] != "*" else 12 * 1.3,
+                markeredgewidth=0,
+                zorder=2,
+            )
+
+            # error bars on top of the points
+            ax.errorbar(
+                t, e,
+                xerr=[[x_lower], [t_std]],
+                yerr=[[y_lower], [e_std]],
+                fmt="none",
+                ecolor=palette[row["Method"]],
+                elinewidth=1, capsize=3,
+                zorder=3,
+            )
+
+        # set title and label of the subplot
+        ax.set_title(bold(title), fontsize=16, fontweight="bold")
+        ax.set_xlabel(f"({chr(ord('a') + i)})", fontsize=16)
+        ax.set_ylabel("")
+        ax.tick_params(axis="both", which="both", labelsize=14)
+
+        # show only powers of 10 in the x axis and make it start from the desired value based on the centrality
+        ax.set_xscale("log")
+        ax.set_xlim(left=x_min)
+        ax.xaxis.set_major_locator(ticker.LogLocator(base=10, numticks=20))
+        ax.xaxis.set_major_formatter(ticker.LogFormatterMathtext(base=10))
+        ax.xaxis.set_minor_formatter(ticker.NullFormatter())
+
+        # format the values in the y axis to 3 decimals and make it start from 0
+        ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%.3f"))
+        ax.set_ylim(bottom=0)
+        ax.yaxis.set_major_locator(ticker.MultipleLocator(0.001))
+
+    # set shared axes labels
+    x_label = fig.supxlabel("Time (s)", fontsize=16)
+    y_label = fig.supylabel("Error (MAE)", fontsize=16)
+
+    # create a shared legend with methods above the subplots
+    method_labels = [m if m_lin == m_harmonic else f"{m_lin} / {m_harmonic}" for m, m_lin, m_harmonic in zip(methods_order_lin, methods_order_lin, methods_order_harmonic)]
+    method_handles = [Line2D([], [], marker="o", linestyle="none", color=palette[m], label=label, markersize=12, markeredgewidth=0) for m, label in zip(methods_order_lin, method_labels)]
+    method_legend = fig.legend(
+        handles=method_handles, title="Method",
+        loc="outside upper center", ncol=len(method_handles), frameon=False,
+        title_fontsize=16,
+        fontsize=14
+    )
+
+    # create a shared legend with datasets below the subplots
+    dataset_handles = [Line2D([], [], marker=markers[d], linestyle="none", color="lightgray", label=d, markersize=12 if markers[d] != "*" else 12 * 1.3, markeredgewidth=0.5) for d in datasets_order]
+    dataset_legend = fig.legend(
+        handles=dataset_handles, title="Dataset",
+        loc="upper center", bbox_to_anchor=(0.5, 0.0), ncol=len(datasets_order),
+        title_fontsize=16,
+        fontsize=14
+    )
+
+    # save the plot
+    plt.savefig(output_path, bbox_inches="tight", bbox_extra_artists=[method_legend, dataset_legend, x_label, y_label])
 
 def parse_args():
 
@@ -661,8 +764,7 @@ if __name__ == "__main__":
 
     # create and save the plots
     os.makedirs(args.output_dir, exist_ok=True)
-    time_error_plot(lin_plot_df, "lin", palette, markers, methods_order_lin, datasets_order, Path(args.output_dir) / "lin_summary_plot.pdf")
-    time_error_plot(harmonic_plot_df, "harmonic", palette, markers, methods_order_harmonic, datasets_order, Path(args.output_dir) / "harmonic_summary_plot.pdf")
+    time_error_plots(lin_plot_df, harmonic_plot_df, palette, markers, methods_order_lin, methods_order_harmonic, datasets_order, Path(args.output_dir) / "summary_plot.pdf")
     times_k_plot(summaries_df, "lin", palette, n_threads, l, c, delta, methods_order_lin, datasets_order, Path(args.output_dir) / "lin_times_k.pdf")
     times_k_plot(summaries_df, "harmonic", palette, n_threads, l, c, delta, methods_order_harmonic, datasets_order, Path(args.output_dir) / "harmonic_times_k.pdf")
     times_l_plot(summaries_df, "lin", palette, n_threads, k, c, delta, methods_order_lin, datasets_order, Path(args.output_dir) / "lin_times_l.pdf")
