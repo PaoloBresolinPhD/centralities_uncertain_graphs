@@ -10,86 +10,12 @@ import seaborn as sns
 from matplotlib.lines import Line2D
 from matplotlib.colors import to_rgba
 
-# ----------------------------------------------------------------------
-# Layout of the VLDB template (acmart.cls, sigconf, 9pt)
-# ----------------------------------------------------------------------
-# \columnwidth = 241.15pt, \textwidth = 506.30pt (1in = 72.27pt)
-COLUMN_WIDTH = 241.15 / 72.27   # ~3.34in -> \includegraphics[width=\columnwidth]
-TEXT_WIDTH = 506.30 / 72.27     # ~7.01in -> figure* with \includegraphics[width=\textwidth]
-
-# font sizes (pt): captions in the template are 8pt, body text 9pt
-LABEL_SIZE = 8
-TICK_SIZE = 7
-LEGEND_SIZE = 7
-
-# marker size (pt); stars look smaller than other markers, so they are enlarged
-MARKER_SIZE = 5
-STAR_SCALE = 1.3
-
-# set to False if LaTeX (with the libertine and newtx packages) is not installed
-USE_TEX = True
-
-
-def set_paper_style(use_tex=USE_TEX):
-    """
-    Seaborn whitegrid style with fonts and sizes matching the VLDB template.
-    Must be called instead of sns.set_theme / sns.set_style, since those reset the fonts.
-    """
-
-    rc = {
-        # fonts: Linux Libertine as in acmart.cls
-        "font.family": "serif",
-        "font.serif": ["Linux Libertine O", "Libertinus Serif", "Linux Libertine", "DejaVu Serif"],
-        "font.size": LABEL_SIZE,
-        "axes.titlesize": LABEL_SIZE,
-        "axes.labelsize": LABEL_SIZE,
-        "xtick.labelsize": TICK_SIZE,
-        "ytick.labelsize": TICK_SIZE,
-        "legend.fontsize": LEGEND_SIZE,
-        "legend.title_fontsize": LABEL_SIZE,
-        "figure.titlesize": LABEL_SIZE,
-        "figure.labelsize": LABEL_SIZE,
-
-        # thinner lines, suited to small figures
-        "axes.linewidth": 0.6,
-        "grid.linewidth": 0.4,
-        "lines.linewidth": 0.8,
-        "xtick.major.width": 0.6,
-        "ytick.major.width": 0.6,
-        "patch.linewidth": 0.5,
-
-        # embed TrueType fonts instead of Type 3 (rejected by many submission checkers)
-        "pdf.fonttype": 42,
-        "ps.fonttype": 42,
-    }
-
-    if use_tex:
-        # render all text with LaTeX, using the same packages as acmart.cls (pdflatex branch)
-        rc["text.usetex"] = True
-        rc["text.latex.preamble"] = (
-            r"\usepackage[T1]{fontenc}"
-            r"\usepackage[tt=false, type1=true]{libertine}"
-            r"\usepackage[libertine]{newtxmath}"
-        )
-    else:
-        # approximation without LaTeX: use the serif font above for math too (e.g. 10^x ticks)
-        rc["text.usetex"] = False
-        rc["mathtext.fontset"] = "custom"
-        rc["mathtext.rm"] = "serif"
-        rc["mathtext.it"] = "serif:italic"
-        rc["mathtext.bf"] = "serif:bold"
-
-    sns.set_theme(context="paper", style="whitegrid", rc=rc)
-
-
-def marker_size(marker):
-    return MARKER_SIZE * STAR_SCALE if marker == "*" else MARKER_SIZE
-
+# render all text with LaTeX
+USE_LATEX = True
 
 def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_order, datasets_order, output_path, n_cols=3):
     """
     Creates a single figure with one bar subplot for each dataset across different values of k.
-    Sized for a figure* spanning both columns.
     """
  
     # filter the dataframe by keeping only required data
@@ -109,19 +35,21 @@ def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_o
     # close any previously opened subplot
     plt.close()
 
-    # set theme, style and fonts
-    set_paper_style()
+    # set theme and style
+    sns.set_theme("paper", font_scale=1.0)
+    sns.set_style("whitegrid")
+    plt.rcParams.update({"text.usetex": USE_LATEX, "font.family": "serif" if USE_LATEX else "sans-serif"})
 
     # compute the number of rows for the subplots
     n_rows = int(np.ceil(len(datasets_order) / n_cols))
 
-    # initialize the figure at its final size in the paper (full text width)
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(TEXT_WIDTH, 1.9 * n_rows + 0.6), squeeze=False, layout="constrained")
+    # initialize the figure with the desired number of rows and columns
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows), squeeze=False, layout="constrained")
 
     # add some space among rows
     fig.get_layout_engine().set(hspace=0.06)
 
-    # flatten the array with the axes of the subplots
+    # flattes the array with the axes of the subplots
     axes = axes.flatten()
 
     # iterate over the subplots and datasets
@@ -140,18 +68,18 @@ def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_o
             hue_order=methods_order,
             palette=palette,
             ax=ax,
-            saturation=1,
-            err_kws={"linewidth": 0.8},
+            saturation=1
         )
 
         # remove the legend: we want a single legend for all subplots on top of them
         if ax.get_legend() is not None:
             ax.get_legend().remove()
 
-        # set title and axes labels (sizes come from set_paper_style)
-        ax.set_title(dataset)
-        ax.set_xlabel(f"({chr(ord('a') + i)})")
+        # set title, axes labels and ticks
+        ax.set_title(dataset, fontsize=18)
+        ax.set_xlabel(f"({chr(ord('a') + i)})", fontsize=18)
         ax.set_ylabel("")
+        ax.tick_params(axis="both", which="both", labelsize=16)
  
         # set the y axis to log scale with only powers of 10, showing at least two powers of 10
         ax.set_yscale("log")
@@ -170,31 +98,39 @@ def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_o
         ax.set_visible(False)
  
     # set shared axes labels
-    fig.supxlabel("Number of Sampled Possible Worlds (k)")
-    fig.supylabel("Time (s)")
+    x_label = fig.supxlabel("Number of Sampled Possible Worlds (k)", fontsize=18)
+    y_label = fig.supylabel("Time (s)", fontsize=18)
  
-    # create a single, shared legend above all subplots ("outside" keeps it inside the figure size)
+    # create a single, shared legend above all subplots
     handles = [Patch(facecolor=palette[m], label=m) for m in methods_order]
-    fig.legend(handles=handles, title="Method", loc="outside upper center", ncol=len(methods_order), frameon=False)
+    legend = fig.legend(
+        handles=handles,
+        title="Method",
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.0),
+        ncol=len(methods_order),
+        frameon=False,
+        title_fontsize=18,
+        fontsize=16
+    )
  
-    # save the plot: no bbox_inches="tight", so the PDF keeps exactly the size set above
-    plt.savefig(output_path)
-
+    # save the plot
+    plt.savefig(output_path, bbox_inches="tight", bbox_extra_artists=[legend, x_label, y_label])
 
 def time_error_plot(plot_df, centrality, palette, markers, methods_order, datasets_order, output_path):
     """
-    Scatter of mean error vs mean running time for each (dataset, method) pair.
-    Sized for a single column.
     """
 
     # close previous plots
     plt.close()
 
-    # set theme, style and fonts
-    set_paper_style()
+    # set theme and style
+    sns.set_theme("paper", font_scale=1.0)
+    sns.set_style("whitegrid")
+    plt.rcParams.update({"text.usetex": USE_LATEX, "font.family": "serif" if USE_LATEX else "sans-serif"})
 
-    # create the figure at its final size in the paper (one column)
-    fig, ax = plt.subplots(figsize=(COLUMN_WIDTH, 3.0), layout="constrained")
+    # create the figure
+    fig, ax = plt.subplots()
 
     # iterate through the rows of the input df
     for _, row in plot_df.iterrows():
@@ -203,17 +139,18 @@ def time_error_plot(plot_df, centrality, palette, markers, methods_order, datase
         t, t_std = row["Time"], row["Time_std"]
         e, e_std = row["MAE"], row["MAE_std"]
 
+
         # clip the lower bars: time must stay > 0 on a log axis, MAE can't be < 0
         x_lower = min(t_std, t * 0.999)
         y_lower = min(e_std, e)
 
-        # points: semi-transparent fill
+        # points: semi-transparent fill, opaque edge so the dataset shape stays readable
         ax.plot(
             t, e,
             marker=markers[row["Dataset"]], linestyle="none",
             markerfacecolor=to_rgba(palette[row["Method"]], 0.5),
             markeredgecolor=palette[row["Method"]],
-            markersize=marker_size(markers[row["Dataset"]]),
+            markersize=12 if markers[row["Dataset"]] != "*" else 12 * 1.3,
             markeredgewidth=0,
             zorder=2,
         )
@@ -225,7 +162,7 @@ def time_error_plot(plot_df, centrality, palette, markers, methods_order, datase
             yerr=[[y_lower], [e_std]],
             fmt="none",
             ecolor=palette[row["Method"]],
-            elinewidth=0.6, capsize=1.5, capthick=0.6,
+            elinewidth=1, capsize=3,
             zorder=3,
         )
 
@@ -246,17 +183,39 @@ def time_error_plot(plot_df, centrality, palette, markers, methods_order, datase
     ax.set_ylim(bottom=0)
     ax.yaxis.set_major_locator(ticker.MultipleLocator(0.001))
  
-    # legend with methods above the plot
-    method_handles = [Line2D([], [], marker="o", linestyle="none", color=palette[m], label=m, markersize=MARKER_SIZE, markeredgewidth=0) for m in methods_order]
-    fig.legend(handles=method_handles, title="Method", loc="outside upper center", ncol=len(methods_order), frameon=False)
-
-    # legend with datasets below the plot: a column is too narrow to place it on the right
-    dataset_handles = [Line2D([], [], marker=markers[d], linestyle="none", color="gray", label=d, markersize=marker_size(markers[d]), markeredgewidth=0) for d in datasets_order]
-    fig.legend(handles=dataset_handles, title="Dataset", loc="outside lower center", ncol=3, frameon=False, columnspacing=1.0, handletextpad=0.3)
+    # set the font sizes of title, axes labels and axes values
+    plt.title(plt.gca().get_title(), fontsize=16)
+    plt.xlabel(plt.gca().get_xlabel(), fontsize=16)
+    plt.ylabel(plt.gca().get_ylabel(), fontsize=16)
+    plt.tick_params(axis="both", which="both", labelsize=14)
+    
+    # set the font sizes for the legend
+    legend = plt.gca().get_legend()
+    if legend:
+        plt.setp(legend.get_texts(), fontsize=14)
+        plt.setp(legend.get_title(), fontsize=16)
  
-    # save the plot: no bbox_inches="tight", so the PDF keeps exactly the size set above
-    plt.savefig(output_path)
+    # create a legend with methods
+    method_handles = [Line2D([], [], marker="o", linestyle="none", color=palette[m], label=m, markersize=12, markeredgewidth=0) for m in methods_order]
+    method_legend = ax.legend(
+        handles=method_handles, title="Method",
+        loc="lower center", bbox_to_anchor=(0.5, 1.02), ncol=len(methods_order), frameon=False,
+        title_fontsize=16,
+        fontsize=14
+    )
+    ax.add_artist(method_legend)
 
+    # create a legend with datasets
+    dataset_handles = [Line2D([], [], marker=markers[d], linestyle="none", color="lightgray", label=d, markersize=12 if markers[d] != "*" else 12 * 1.3, markeredgewidth=0.5) for d in datasets_order]
+    dataset_legend = ax.legend(
+        handles=dataset_handles, title="Dataset",
+        loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=3,
+        title_fontsize=16,
+        fontsize=14
+    )
+ 
+    # save the plot
+    plt.savefig(output_path, bbox_inches="tight", bbox_extra_artists=[method_legend, dataset_legend])
 
 def parse_args():
 
@@ -321,7 +280,7 @@ if __name__ == "__main__":
             ((lin_df["Method"] == "ew") & (lin_df["l"] == l) & (lin_df["c"] == c)) |
             ((lin_df["Method"] == "pps") & (lin_df["l"] == l) & (lin_df["delta"] == delta))
         )
-    ][columns_to_keep].copy()
+    ][columns_to_keep]
     harmonic_df = harmonic_df[
         (harmonic_df["n_threads"] == n_threads) &
         (harmonic_df["k"] == k) & (
@@ -329,7 +288,7 @@ if __name__ == "__main__":
             ((harmonic_df["Method"] == "ew") & (harmonic_df["l"] == l)) |
             ((harmonic_df["Method"] == "pps") & (harmonic_df["l"] == l) & (harmonic_df["delta"] == delta))
         )
-    ][columns_to_keep].copy()
+    ][columns_to_keep]
 
     # map the names of the methods
     lin_df["Method"] = lin_df["Method"].map(
