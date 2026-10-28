@@ -9,9 +9,17 @@ import numpy as np
 import seaborn as sns
 from matplotlib.lines import Line2D
 from matplotlib.colors import to_rgba
+from matplotlib import font_manager
 
 # render all text with LaTeX
 USE_LATEX = True
+
+def bold(text):
+    """
+    Returns the text so that it is rendered in bold: with LaTeX, fontweight="bold" is ignored,
+    so the text must be wrapped in \\textbf{}.
+    """
+    return rf"\textbf{{{text}}}" if USE_LATEX else text
 
 def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_order, datasets_order, output_path, n_cols=3):
     """
@@ -76,8 +84,8 @@ def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_o
             ax.get_legend().remove()
 
         # set title, axes labels and ticks
-        ax.set_title(dataset, fontsize=18)
-        ax.set_xlabel(f"({chr(ord('a') + i)})", fontsize=18)
+        ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
+        ax.set_xlabel(bold(f"({chr(ord('a') + i)})"), fontsize=18, fontweight="bold")
         ax.set_ylabel("")
         ax.tick_params(axis="both", which="both", labelsize=16)
  
@@ -117,6 +125,308 @@ def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_o
     # save the plot
     plt.savefig(output_path, bbox_inches="tight", bbox_extra_artists=[legend, x_label, y_label])
 
+def times_l_plot(plot_df, centrality, palette, n_threads, k, c, delta, methods_order, datasets_order, output_path, n_cols=3):
+    """
+    Creates a single figure with one bar subplot for each dataset across different values of l.
+    """
+ 
+    # filter the dataframe by keeping only required data (the exact method does not depend on l)
+    df = plot_df[(plot_df["Centrality"] == centrality) & (plot_df["n_threads"] == n_threads) & (plot_df["k"] == k)]
+    ew_mask = df["Method"] == "ew"
+    if centrality == "lin":
+        ew_mask &= df["c"] == c
+    pps_mask = (df["Method"] == "pps") & (df["delta"] == delta)
+    df = df[ew_mask | pps_mask][["Dataset", "Method", "l", "Time"]].copy()
+ 
+    # map the names of the methods
+    prefix = "Lin" if centrality == "lin" else "Harmonic"
+    df["Method"] = df["Method"].map({"ew": f"{prefix}EW", "pps": f"{prefix}PPS"})
+    df["l"] = df["l"].astype(int)
+    l_order = sorted(df["l"].unique())
+
+    # keep only the methods that appear in the plot
+    methods_order = [m for m in methods_order if m != "Exact"]
+
+    # close any previously opened subplot
+    plt.close()
+
+    # set theme and style
+    sns.set_theme("paper", font_scale=1.0)
+    sns.set_style("whitegrid")
+    plt.rcParams.update({"text.usetex": USE_LATEX, "font.family": "serif" if USE_LATEX else "sans-serif"})
+
+    # compute the number of rows for the subplots
+    n_rows = int(np.ceil(len(datasets_order) / n_cols))
+
+    # initialize the figure with the desired number of rows and columns
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows), squeeze=False, layout="constrained")
+
+    # add some space among rows
+    fig.get_layout_engine().set(hspace=0.06)
+
+    # flatten the array with the axes of the subplots
+    axes = axes.flatten()
+
+    # iterate over the subplots and datasets
+    for i, (ax, dataset) in enumerate(zip(axes, datasets_order)):
+        
+        # extract the current dataset
+        dataset_df = df[df["Dataset"] == dataset]
+
+        # create the barplot
+        sns.barplot(
+            data=dataset_df,
+            x="l",
+            y="Time",
+            hue="Method",
+            order=l_order,
+            hue_order=methods_order,
+            palette=palette,
+            ax=ax,
+            saturation=1
+        )
+
+        # remove the legend: we want a single legend for all subplots on top of them
+        if ax.get_legend() is not None:
+            ax.get_legend().remove()
+
+        # set title, axes labels and ticks
+        ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
+        ax.set_xlabel(bold(f"({chr(ord('a') + i)})"), fontsize=18, fontweight="bold")
+        ax.set_ylabel("")
+        ax.tick_params(axis="both", which="both", labelsize=16)
+ 
+        # set the y axis to log scale with only powers of 10, showing at least two powers of 10
+        ax.set_yscale("log")
+        if not dataset_df.empty:
+            lo = 10 ** np.floor(np.log10(dataset_df["Time"].min()))
+            hi = 10 ** np.ceil(np.log10(dataset_df["Time"].max() * 1.5))  # room for the error bars
+            if hi / lo < 100:
+                lo /= 10
+            ax.set_ylim(lo, hi)
+        ax.yaxis.set_major_locator(ticker.LogLocator(base=10, numticks=20))
+        ax.yaxis.set_major_formatter(ticker.LogFormatterMathtext(base=10))
+        ax.yaxis.set_minor_formatter(ticker.NullFormatter())
+ 
+    # hide unused subplots if the grid is larger than the number of datasets
+    for ax in axes[len(datasets_order):]:
+        ax.set_visible(False)
+ 
+    # set shared axes labels
+    x_label = fig.supxlabel("Number of Sampled Nodes (l)", fontsize=18)
+    y_label = fig.supylabel("Time (s)", fontsize=18)
+ 
+    # create a single, shared legend above all subplots
+    handles = [Patch(facecolor=palette[m], label=m) for m in methods_order]
+    legend = fig.legend(
+        handles=handles,
+        title="Method",
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.0),
+        ncol=len(methods_order),
+        frameon=False,
+        title_fontsize=18,
+        fontsize=16
+    )
+ 
+    # save the plot
+    plt.savefig(output_path, bbox_inches="tight", bbox_extra_artists=[legend, x_label, y_label])
+
+def errors_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_order, datasets_order, output_path, n_cols=3):
+    """
+    Creates a single figure with one box subplot for each dataset showing the errors across different values of k.
+    """
+ 
+    # filter the dataframe by keeping only required data
+    df = plot_df[(plot_df["Centrality"] == centrality) & (plot_df["n_threads"] == n_threads)]
+    ew_mask = (df["Method"] == "ew") & (df["l"] == l)
+    if centrality == "lin":
+        ew_mask &= df["c"] == c
+    pps_mask = (df["Method"] == "pps") & (df["l"] == l) & (df["delta"] == delta)
+    df = df[(df["Method"] == "mc") | ew_mask | pps_mask][["Dataset", "Method", "k", "MAE"]].copy()
+ 
+    # map the names of the methods
+    prefix = "Lin" if centrality == "lin" else "Harmonic"
+    df["Method"] = df["Method"].map({"mc": "Exact", "ew": f"{prefix}EW", "pps": f"{prefix}PPS"})
+    df["k"] = df["k"].astype(int)
+    k_order = sorted(df["k"].unique())
+
+    # close any previously opened subplot
+    plt.close()
+
+    # set theme and style
+    sns.set_theme("paper", font_scale=1.0)
+    sns.set_style("whitegrid")
+    plt.rcParams.update({"text.usetex": USE_LATEX, "font.family": "serif" if USE_LATEX else "sans-serif"})
+
+    # compute the number of rows for the subplots
+    n_rows = int(np.ceil(len(datasets_order) / n_cols))
+
+    # initialize the figure with the desired number of rows and columns
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows), squeeze=False, layout="constrained")
+
+    # add some space among rows
+    fig.get_layout_engine().set(hspace=0.06)
+
+    # flatten the array with the axes of the subplots
+    axes = axes.flatten()
+
+    # iterate over the subplots and datasets
+    for i, (ax, dataset) in enumerate(zip(axes, datasets_order)):
+        
+        # extract the current dataset
+        dataset_df = df[df["Dataset"] == dataset]
+
+        # create the boxplot
+        sns.boxplot(
+            data=dataset_df,
+            x="k",
+            y="MAE",
+            hue="Method",
+            order=k_order,
+            hue_order=methods_order,
+            palette=palette,
+            ax=ax,
+            saturation=1
+        )
+
+        # remove the legend: we want a single legend for all subplots on top of them
+        if ax.get_legend() is not None:
+            ax.get_legend().remove()
+
+        # set title, axes labels and ticks
+        ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
+        ax.set_xlabel(bold(f"({chr(ord('a') + i)})"), fontsize=18, fontweight="bold")
+        ax.set_ylabel("")
+        ax.tick_params(axis="both", which="both", labelsize=16)
+ 
+        # make the y axis start from 0 and format its values to 3 decimals
+        ax.set_ylim(bottom=0)
+        ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%.3f"))
+ 
+    # hide unused subplots if the grid is larger than the number of datasets
+    for ax in axes[len(datasets_order):]:
+        ax.set_visible(False)
+ 
+    # set shared axes labels
+    x_label = fig.supxlabel("Number of Sampled Possible Worlds (k)", fontsize=18)
+    y_label = fig.supylabel("Error (MAE)", fontsize=18)
+ 
+    # create a single, shared legend above all subplots
+    handles = [Patch(facecolor=palette[m], label=m) for m in methods_order]
+    legend = fig.legend(
+        handles=handles,
+        title="Method",
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.0),
+        ncol=len(methods_order),
+        frameon=False,
+        title_fontsize=18,
+        fontsize=16
+    )
+ 
+    # save the plot
+    plt.savefig(output_path, bbox_inches="tight", bbox_extra_artists=[legend, x_label, y_label])
+
+def errors_l_plot(plot_df, centrality, palette, n_threads, k, c, delta, methods_order, datasets_order, output_path, n_cols=3):
+    """
+    Creates a single figure with one box subplot for each dataset showing the errors across different values of l.
+    """
+ 
+    # filter the dataframe by keeping only required data (the exact method does not depend on l)
+    df = plot_df[(plot_df["Centrality"] == centrality) & (plot_df["n_threads"] == n_threads) & (plot_df["k"] == k)]
+    ew_mask = df["Method"] == "ew"
+    if centrality == "lin":
+        ew_mask &= df["c"] == c
+    pps_mask = (df["Method"] == "pps") & (df["delta"] == delta)
+    df = df[ew_mask | pps_mask][["Dataset", "Method", "l", "MAE"]].copy()
+ 
+    # map the names of the methods
+    prefix = "Lin" if centrality == "lin" else "Harmonic"
+    df["Method"] = df["Method"].map({"ew": f"{prefix}EW", "pps": f"{prefix}PPS"})
+    df["l"] = df["l"].astype(int)
+    l_order = sorted(df["l"].unique())
+
+    # keep only the methods that appear in the plot
+    methods_order = [m for m in methods_order if m != "Exact"]
+
+    # close any previously opened subplot
+    plt.close()
+
+    # set theme and style
+    sns.set_theme("paper", font_scale=1.0)
+    sns.set_style("whitegrid")
+    plt.rcParams.update({"text.usetex": USE_LATEX, "font.family": "serif" if USE_LATEX else "sans-serif"})
+
+    # compute the number of rows for the subplots
+    n_rows = int(np.ceil(len(datasets_order) / n_cols))
+
+    # initialize the figure with the desired number of rows and columns
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows), squeeze=False, layout="constrained")
+
+    # add some space among rows
+    fig.get_layout_engine().set(hspace=0.06)
+
+    # flatten the array with the axes of the subplots
+    axes = axes.flatten()
+
+    # iterate over the subplots and datasets
+    for i, (ax, dataset) in enumerate(zip(axes, datasets_order)):
+        
+        # extract the current dataset
+        dataset_df = df[df["Dataset"] == dataset]
+
+        # create the boxplot
+        sns.boxplot(
+            data=dataset_df,
+            x="l",
+            y="MAE",
+            hue="Method",
+            order=l_order,
+            hue_order=methods_order,
+            palette=palette,
+            ax=ax,
+            saturation=1
+        )
+
+        # remove the legend: we want a single legend for all subplots on top of them
+        if ax.get_legend() is not None:
+            ax.get_legend().remove()
+
+        # set title, axes labels and ticks
+        ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
+        ax.set_xlabel(bold(f"({chr(ord('a') + i)})"), fontsize=18, fontweight="bold")
+        ax.set_ylabel("")
+        ax.tick_params(axis="both", which="both", labelsize=16)
+ 
+        # make the y axis start from 0 and format its values to 3 decimals
+        ax.set_ylim(bottom=0)
+        ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%.3f"))
+ 
+    # hide unused subplots if the grid is larger than the number of datasets
+    for ax in axes[len(datasets_order):]:
+        ax.set_visible(False)
+ 
+    # set shared axes labels
+    x_label = fig.supxlabel("Number of Sampled Nodes (l)", fontsize=18)
+    y_label = fig.supylabel("Error (MAE)", fontsize=18)
+ 
+    # create a single, shared legend above all subplots
+    handles = [Patch(facecolor=palette[m], label=m) for m in methods_order]
+    legend = fig.legend(
+        handles=handles,
+        title="Method",
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.0),
+        ncol=len(methods_order),
+        frameon=False,
+        title_fontsize=18,
+        fontsize=16
+    )
+ 
+    # save the plot
+    plt.savefig(output_path, bbox_inches="tight", bbox_extra_artists=[legend, x_label, y_label])
+
 def time_error_plot(plot_df, centrality, palette, markers, methods_order, datasets_order, output_path):
     """
     """
@@ -130,7 +440,7 @@ def time_error_plot(plot_df, centrality, palette, markers, methods_order, datase
     plt.rcParams.update({"text.usetex": USE_LATEX, "font.family": "serif" if USE_LATEX else "sans-serif"})
 
     # create the figure
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(14, 5), layout="constrained")
 
     # iterate through the rows of the input df
     for _, row in plot_df.iterrows():
@@ -209,7 +519,7 @@ def time_error_plot(plot_df, centrality, palette, markers, methods_order, datase
     dataset_handles = [Line2D([], [], marker=markers[d], linestyle="none", color="lightgray", label=d, markersize=12 if markers[d] != "*" else 12 * 1.3, markeredgewidth=0.5) for d in datasets_order]
     dataset_legend = ax.legend(
         handles=dataset_handles, title="Dataset",
-        loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=3,
+        loc="upper center", bbox_to_anchor=(0.5, -0.17), ncol=len(datasets_order),
         title_fontsize=16,
         fontsize=14
     )
@@ -355,3 +665,9 @@ if __name__ == "__main__":
     time_error_plot(harmonic_plot_df, "harmonic", palette, markers, methods_order_harmonic, datasets_order, Path(args.output_dir) / "harmonic_summary_plot.pdf")
     times_k_plot(summaries_df, "lin", palette, n_threads, l, c, delta, methods_order_lin, datasets_order, Path(args.output_dir) / "lin_times_k.pdf")
     times_k_plot(summaries_df, "harmonic", palette, n_threads, l, c, delta, methods_order_harmonic, datasets_order, Path(args.output_dir) / "harmonic_times_k.pdf")
+    times_l_plot(summaries_df, "lin", palette, n_threads, k, c, delta, methods_order_lin, datasets_order, Path(args.output_dir) / "lin_times_l.pdf")
+    times_l_plot(summaries_df, "harmonic", palette, n_threads, k, c, delta, methods_order_harmonic, datasets_order, Path(args.output_dir) / "harmonic_times_l.pdf")
+    errors_k_plot(summaries_df, "lin", palette, n_threads, l, c, delta, methods_order_lin, datasets_order, Path(args.output_dir) / "lin_errors_k.pdf")
+    errors_k_plot(summaries_df, "harmonic", palette, n_threads, l, c, delta, methods_order_harmonic, datasets_order, Path(args.output_dir) / "harmonic_errors_k.pdf")
+    errors_l_plot(summaries_df, "lin", palette, n_threads, k, c, delta, methods_order_lin, datasets_order, Path(args.output_dir) / "lin_errors_l.pdf")
+    errors_l_plot(summaries_df, "harmonic", palette, n_threads, k, c, delta, methods_order_harmonic, datasets_order, Path(args.output_dir) / "harmonic_errors_l.pdf")
