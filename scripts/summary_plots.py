@@ -89,14 +89,19 @@ def times_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_o
         ax.set_ylabel("")
         ax.tick_params(axis="both", which="both", labelsize=16)
  
-        # set the y axis to log scale with only powers of 10, showing at least two powers of 10
+        # # set the y axis to log scale with only powers of 10, showing at least two powers of 10
+        # ax.set_yscale("log")
+        # if not dataset_df.empty:
+        #     lo = 10 ** np.floor(np.log10(dataset_df["Time"].min()))
+        #     hi = 10 ** np.ceil(np.log10(dataset_df["Time"].max() * 1.5))  # room for the error bars
+        #     if hi / lo < 100:
+        #         lo /= 10
+        #     ax.set_ylim(lo, hi)
+
+        # set the y axis to log scale with the same range in all subplots
         ax.set_yscale("log")
-        if not dataset_df.empty:
-            lo = 10 ** np.floor(np.log10(dataset_df["Time"].min()))
-            hi = 10 ** np.ceil(np.log10(dataset_df["Time"].max() * 1.5))  # room for the error bars
-            if hi / lo < 100:
-                lo /= 10
-            ax.set_ylim(lo, hi)
+        ax.set_ylim(1e-2, 1e8)
+
         ax.yaxis.set_major_locator(ticker.LogLocator(base=10, numticks=20))
         ax.yaxis.set_major_formatter(ticker.LogFormatterMathtext(base=10))
         ax.yaxis.set_minor_formatter(ticker.NullFormatter())
@@ -196,17 +201,21 @@ def times_l_plot(plot_df, centrality, palette, n_threads, k, c, delta, methods_o
         ax.set_ylabel("")
         ax.tick_params(axis="both", which="both", labelsize=16)
  
-        # set the y axis to log scale with only powers of 10, showing at least two powers of 10
+        # # set the y axis to log scale with only powers of 10, showing at least two powers of 10
+        # ax.set_yscale("log")
+        # if not dataset_df.empty:
+        #     lo = 10 ** np.floor(np.log10(dataset_df["Time"].min()))
+        #     hi = 10 ** np.ceil(np.log10(dataset_df["Time"].max() * 1.5))  # room for the error bars
+        #     if hi / lo < 100:
+        #         lo /= 10
+        #     ax.set_ylim(lo, hi)
+        # ax.yaxis.set_major_locator(ticker.LogLocator(base=10, numticks=20))
+        # ax.yaxis.set_major_formatter(ticker.LogFormatterMathtext(base=10))
+        # ax.yaxis.set_minor_formatter(ticker.NullFormatter())
+
+        # set the y axis to log scale with the same range in all subplots
         ax.set_yscale("log")
-        if not dataset_df.empty:
-            lo = 10 ** np.floor(np.log10(dataset_df["Time"].min()))
-            hi = 10 ** np.ceil(np.log10(dataset_df["Time"].max() * 1.5))  # room for the error bars
-            if hi / lo < 100:
-                lo /= 10
-            ax.set_ylim(lo, hi)
-        ax.yaxis.set_major_locator(ticker.LogLocator(base=10, numticks=20))
-        ax.yaxis.set_major_formatter(ticker.LogFormatterMathtext(base=10))
-        ax.yaxis.set_minor_formatter(ticker.NullFormatter())
+        ax.set_ylim(1e-2, 1e4)
  
     # hide unused subplots if the grid is larger than the number of datasets
     for ax in axes[len(datasets_order):]:
@@ -301,7 +310,7 @@ def errors_k_plot(plot_df, centrality, palette, n_threads, l, c, delta, methods_
         ax.tick_params(axis="both", which="both", labelsize=16)
  
         # make the y axis start from 0 and format its values to 3 decimals
-        ax.set_ylim(bottom=0)
+        ax.set_ylim(0, 0.013)
         ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%.3f"))
  
     # hide unused subplots if the grid is larger than the number of datasets
@@ -400,7 +409,7 @@ def errors_l_plot(plot_df, centrality, palette, n_threads, k, c, delta, methods_
         ax.tick_params(axis="both", which="both", labelsize=16)
  
         # make the y axis start from 0 and format its values to 3 decimals
-        ax.set_ylim(bottom=0)
+        ax.set_ylim(0, 0.013)
         ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%.3f"))
  
     # hide unused subplots if the grid is larger than the number of datasets
@@ -594,14 +603,14 @@ def time_error_plots(lin_plot_df, harmonic_plot_df, palette, markers, methods_or
 
         # show only powers of 10 in the x axis and make it start from the desired value based on the centrality
         ax.set_xscale("log")
-        ax.set_xlim(left=x_min)
+        ax.set_xlim(1e-2, 1e8)
         ax.xaxis.set_major_locator(ticker.LogLocator(base=10, numticks=20))
         ax.xaxis.set_major_formatter(ticker.LogFormatterMathtext(base=10))
         ax.xaxis.set_minor_formatter(ticker.NullFormatter())
 
         # format the values in the y axis to 3 decimals and make it start from 0
+        ax.set_ylim(0, 0.005)
         ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%.3f"))
-        ax.set_ylim(bottom=0)
         ax.yaxis.set_major_locator(ticker.MultipleLocator(0.001))
 
     # set shared axes labels
