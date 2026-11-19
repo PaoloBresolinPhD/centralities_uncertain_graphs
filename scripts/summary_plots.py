@@ -196,7 +196,7 @@ def times_l_plot(plot_df, centrality, palette, n_threads, k, c, delta, methods_o
             ax.get_legend().remove()
 
         # set title, axes labels and ticks
-        ax.set_title(bold(dataset), fontsize=18, fontweight="bold")
+        ax.set_title(bold(dataset.rstrip("*")), fontsize=18, fontweight="bold")
         ax.set_xlabel(f"({chr(ord('a') + i)})", fontsize=18)
         ax.set_ylabel("")
         ax.tick_params(axis="both", which="both", labelsize=16)
@@ -683,9 +683,9 @@ if __name__ == "__main__":
             "miner": "ChG-Miner",
             "slashdot": "SlashDot",
             "notredame": "Web-NotreDame",
-            "google": "Web-Google",
-            "berkstan": "Web-BerkStan",
-            "talk": "Wiki-Talk"
+            "google": "Web-Google*",
+            "berkstan": "Web-BerkStan*",
+            "talk": "Wiki-Talk*"
         }
     )
 
@@ -761,15 +761,15 @@ if __name__ == "__main__":
         "ChG-Miner": "^",
         "SlashDot": "s",
         "Web-NotreDame": "d",
-        "Web-Google": "P",
-        "Web-BerkStan": "*",
-        "Wiki-Talk": "H"
+        "Web-Google*": "P",
+        "Web-BerkStan*": "*",
+        "Wiki-Talk*": "H"
     }
 
     # create ordered lists of methods and datasets for the plot legend
     methods_order_lin = ["Exact", "LinEW", "LinPPS"]
     methods_order_harmonic = ["Exact", "HarmonicEW", "HarmonicPPS"]
-    datasets_order = ["ChG-Miner", "SlashDot", "Web-NotreDame", "Web-Google", "Web-BerkStan", "Wiki-Talk"]
+    datasets_order = ["ChG-Miner", "SlashDot", "Web-NotreDame", "Web-Google*", "Web-BerkStan*", "Wiki-Talk*"]
 
     # create and save the plots
     os.makedirs(args.output_dir, exist_ok=True)
